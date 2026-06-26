@@ -4,6 +4,15 @@
    ========================================================================== */
 
 document.addEventListener('DOMContentLoaded', () => {
+    // Función para resolver enlaces de proyectos locales vs producción (Vercel/GitHub Pages)
+    function resolveProjectPath(localPath, productionUrl) {
+        const isLocal = window.location.hostname === 'localhost' || 
+                        window.location.hostname === '127.0.0.1' || 
+                        window.location.hostname.startsWith('192.168.') ||
+                        window.location.protocol === 'file:';
+        return isLocal ? localPath : (productionUrl || localPath);
+    }
+
     // Inicializar Iconos Lucide
     if (typeof lucide !== 'undefined') {
         lucide.createIcons();
@@ -145,7 +154,8 @@ document.addEventListener('DOMContentLoaded', () => {
             ],
             logo: "assets/img/epad.jpeg",
             banner: "assets/img/epad.jpeg",
-            path: "../pagina oficial/index.html"
+            path: "../pagina oficial/index.html",
+            productionUrl: "https://epad-ofical.vercel.app/"
         },
         barberia: {
             title: "Barbería Vázquez (Lerdo, Dgo)",
@@ -160,7 +170,8 @@ document.addEventListener('DOMContentLoaded', () => {
             ],
             logo: "assets/img/barberia.png",
             banner: "assets/img/barberia_principal.jpg",
-            path: "../barberia/index.html"
+            path: "../barberia/index.html",
+            productionUrl: "https://barberia-vazquez.vercel.app/"
         },
         tikeduca: {
             title: "TikEduca — Educadores del Futuro",
@@ -175,7 +186,8 @@ document.addEventListener('DOMContentLoaded', () => {
             ],
             logo: "assets/img/tikeduca.jpg",
             banner: "assets/img/tikeduca_logo_pagina.jpg",
-            path: "../tikeduca/index.html"
+            path: "../tikeduca/index.html",
+            productionUrl: "https://tikeduca-oficial.vercel.app/"
         },
         kbhuates: {
             title: "KB HUATES — Sistema de Pedidos",
@@ -190,7 +202,8 @@ document.addEventListener('DOMContentLoaded', () => {
             ],
             logo: "assets/img/kbhuates.png",
             banner: "assets/img/kbhuates.png",
-            path: "../kBHUATES/index.html"
+            path: "../kBHUATES/index.html",
+            productionUrl: "https://sitio-oficial-kbhuates.vercel.app/"
         },
         compadres: {
             title: "Tacos Los Compadres (Menú Digital)",
@@ -205,7 +218,8 @@ document.addEventListener('DOMContentLoaded', () => {
             ],
             logo: "assets/img/los_compadres.jpeg",
             banner: "assets/img/compadres_1.jpeg",
-            path: "../menu/index.html"
+            path: "../menu/index.html",
+            productionUrl: "https://menu-los-compadres.vercel.app/"
         },
         copa: {
             title: "Registro 3ra Copa Zona Laguna",
@@ -220,7 +234,8 @@ document.addEventListener('DOMContentLoaded', () => {
             ],
             logo: "assets/img/copa.png",
             banner: "assets/img/copa_poster.png",
-            path: "../apli/index.html"
+            path: "../apli/index.html",
+            productionUrl: "https://st24030217-maker.github.io/3ERA-COPA-ZONA-LAGUNA/"
         },
         maps: {
             title: "Localizador de Mapas con Supabase",
@@ -234,7 +249,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 "Funciones de filtrado de ubicaciones por categorías locales."
             ],
             logo: "assets/img/yo_mero.png",
-            path: "../proyecto maps/maps.html"
+            path: "../proyecto maps/maps.html",
+            productionUrl: "https://proyecto-maps.vercel.app/"
         }
     };
 
@@ -285,10 +301,11 @@ document.addEventListener('DOMContentLoaded', () => {
                         });
                     }
 
-                    // Configurar Enlace del Proyecto
+                    // Configurar Enlace del Proyecto (Resuelve local vs producción)
                     const viewProjectBtn = modalOverlay.querySelector('.btn-view-project');
                     if (viewProjectBtn) {
-                        viewProjectBtn.setAttribute('href', data.path);
+                        const finalUrl = resolveProjectPath(data.path, data.productionUrl);
+                        viewProjectBtn.setAttribute('href', finalUrl);
                     }
 
                     // Mostrar modal
