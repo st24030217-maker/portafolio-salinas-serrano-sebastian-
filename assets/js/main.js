@@ -187,7 +187,7 @@ document.addEventListener('DOMContentLoaded', () => {
             logo: "assets/img/tikeduca.jpg",
             banner: "assets/img/tikeduca_logo_pagina.jpg",
             path: "../tikeduca/index.html",
-            productionUrl: "https://tikeduca-oficial.vercel.app/"
+            productionUrl: "https://tik-educa-oficial.vercel.app/"
         },
         kbhuates: {
             title: "KB HUATES — Sistema de Pedidos",
@@ -203,7 +203,7 @@ document.addEventListener('DOMContentLoaded', () => {
             logo: "assets/img/kbhuates.png",
             banner: "assets/img/kbhuates.png",
             path: "../kBHUATES/index.html",
-            productionUrl: "https://sitio-oficial-kbhuates.vercel.app/"
+            productionUrl: "https://la-dupla-ttak.vercel.app/"
         },
         compadres: {
             title: "Tacos Los Compadres (Menú Digital)",
@@ -219,7 +219,7 @@ document.addEventListener('DOMContentLoaded', () => {
             logo: "assets/img/los_compadres.jpeg",
             banner: "assets/img/compadres_1.jpeg",
             path: "../menu/index.html",
-            productionUrl: "https://menu-los-compadres.vercel.app/"
+            productionUrl: "https://st24030217-maker.github.io/MENU-COMPADRES/"
         },
         copa: {
             title: "Registro 3ra Copa Zona Laguna",
