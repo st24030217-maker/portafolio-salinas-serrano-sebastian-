@@ -144,7 +144,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 "Enlaces integrados con APIs de redes sociales y pasarelas de información."
             ],
             logo: "assets/img/epad.jpeg",
-            banner: "assets/img/mockup_epad.png",
+            banner: "assets/img/epad.jpeg",
             path: "../pagina oficial/index.html"
         },
         barberia: {
@@ -159,7 +159,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 "Panel administrativo incorporado para la gestión de barberos y reservas."
             ],
             logo: "assets/img/barberia.png",
-            banner: "assets/img/mockup_barberia.png",
+            banner: "assets/img/barberia_principal.jpg",
             path: "../barberia/index.html"
         },
         tikeduca: {
@@ -174,7 +174,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 "Visualización interactiva de ponentes y agenda del congreso."
             ],
             logo: "assets/img/tikeduca.jpg",
-            banner: "assets/img/mockup_tikeduca.png",
+            banner: "assets/img/tikeduca_logo_pagina.jpg",
             path: "../tikeduca/index.html"
         },
         kbhuates: {
@@ -189,7 +189,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 "Efectos sonoros y transiciones fluidas estilo App nativa."
             ],
             logo: "assets/img/kbhuates.png",
-            banner: "assets/img/mockup_kbhuates.png",
+            banner: "assets/img/kbhuates.png",
             path: "../kBHUATES/index.html"
         },
         compadres: {
@@ -204,7 +204,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 "Scroll spy y navegación rápida adaptada a móviles para uso rápido en restaurante."
             ],
             logo: "assets/img/los_compadres.jpeg",
-            banner: "assets/img/mockup_compadres.png",
+            banner: "assets/img/compadres_1.jpeg",
             path: "../menu/index.html"
         },
         copa: {
@@ -219,7 +219,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 "Panel administrativo interno seguro para descargar plantillas de juego."
             ],
             logo: "assets/img/copa.png",
-            banner: "assets/img/mockup_copa.png",
+            banner: "assets/img/copa_poster.png",
             path: "../apli/index.html"
         },
         maps: {
@@ -234,7 +234,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 "Funciones de filtrado de ubicaciones por categorías locales."
             ],
             logo: "assets/img/yo_mero.png",
-            banner: "assets/img/mockup_maps.png",
             path: "../proyecto maps/maps.html"
         }
     };
