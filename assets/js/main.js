@@ -144,6 +144,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 "Enlaces integrados con APIs de redes sociales y pasarelas de información."
             ],
             logo: "assets/img/epad.jpeg",
+            banner: "assets/img/mockup_epad.png",
             path: "../pagina oficial/index.html"
         },
         barberia: {
@@ -158,6 +159,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 "Panel administrativo incorporado para la gestión de barberos y reservas."
             ],
             logo: "assets/img/barberia.png",
+            banner: "assets/img/mockup_barberia.png",
             path: "../barberia/index.html"
         },
         tikeduca: {
@@ -172,6 +174,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 "Visualización interactiva de ponentes y agenda del congreso."
             ],
             logo: "assets/img/tikeduca.jpg",
+            banner: "assets/img/mockup_tikeduca.png",
             path: "../tikeduca/index.html"
         },
         kbhuates: {
@@ -186,6 +189,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 "Efectos sonoros y transiciones fluidas estilo App nativa."
             ],
             logo: "assets/img/kbhuates.png",
+            banner: "assets/img/mockup_kbhuates.png",
             path: "../kBHUATES/index.html"
         },
         compadres: {
@@ -200,6 +204,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 "Scroll spy y navegación rápida adaptada a móviles para uso rápido en restaurante."
             ],
             logo: "assets/img/los_compadres.jpeg",
+            banner: "assets/img/mockup_compadres.png",
             path: "../menu/index.html"
         },
         copa: {
@@ -214,6 +219,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 "Panel administrativo interno seguro para descargar plantillas de juego."
             ],
             logo: "assets/img/copa.png",
+            banner: "assets/img/mockup_copa.png",
             path: "../apli/index.html"
         },
         maps: {
@@ -227,7 +233,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 "Marcadores personalizados y popups interactivos con información de ubicación.",
                 "Funciones de filtrado de ubicaciones por categorías locales."
             ],
-            logo: "assets/img/yo_mero.png", // Usamos yo_mero como banner o logo en este caso
+            logo: "assets/img/yo_mero.png",
+            banner: "assets/img/mockup_maps.png",
             path: "../proyecto maps/maps.html"
         }
     };
@@ -251,7 +258,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     
                     // Cargar imagen de banner e icono
                     const bannerImg = modalOverlay.querySelector('.banner-bg');
-                    if (bannerImg) bannerImg.src = data.logo;
+                    if (bannerImg) bannerImg.src = data.banner || data.logo;
                     
                     const logoImg = modalOverlay.querySelector('.modal-logo-img');
                     if (logoImg) logoImg.src = data.logo;
