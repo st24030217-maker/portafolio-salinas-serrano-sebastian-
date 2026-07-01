@@ -244,7 +244,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 "Marcadores personalizados y popups interactivos con información de ubicación.",
                 "Funciones de filtrado de ubicaciones por categorías locales."
             ],
-            logo: "assets/img/yo_mero.png",
+            logo: "assets/img/mockup_maps.png",
+            banner: "assets/img/mockup_maps.png",
             path: "../proyecto maps/maps.html",
             productionUrl: "https://proyecto-maps.vercel.app/"
         }
