@@ -6,11 +6,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     // Función para resolver enlaces de proyectos locales vs producción (Vercel/GitHub Pages)
     function resolveProjectPath(localPath, productionUrl) {
-        const isLocal = window.location.hostname === 'localhost' || 
-                        window.location.hostname === '127.0.0.1' || 
-                        window.location.hostname.startsWith('192.168.') ||
-                        window.location.protocol === 'file:';
-        return isLocal ? localPath : (productionUrl || localPath);
+        return productionUrl || localPath;
     }
 
     // Inicializar Iconos Lucide
