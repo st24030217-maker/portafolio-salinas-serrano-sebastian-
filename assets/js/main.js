@@ -137,6 +137,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- MODALES DE PROYECTOS (DETALLES AMPLIADOS) ---
     const projectData = {
+        milea: {
+            title: "MILEA studio — Catálogo de Servicios",
+            cat: "Web App / E-commerce / Catálogo",
+            techs: ["Next.js", "Tailwind CSS", "Framer Motion", "TypeScript", "React", "Lucide Icons"],
+            desc: "Catálogo digital interactivo y portfolio de servicios de lujo para MILEA studio. Diseñado con un enfoque editorial asimétrico y animaciones fluidas. Cuenta con pantalla de carga con efectos líquidos, buscador en tiempo real, filtros avanzados de precio y categorías, y un modal de cotizaciones integrado con WhatsApp e Instagram.",
+            features: [
+                "Preloader animado con transiciones líquidas y cortinas de revelado.",
+                "Efecto de parallax interactivo con el cursor sobre el fondo fluido.",
+                "Buscador en tiempo real con filtrado inteligente de servicios y categorías.",
+                "Estructura responsiva móvil y diseño asimétrico de nivel editorial."
+            ],
+            logo: "assets/img/logo_milea.png",
+            banner: "assets/img/milea_cards.jpg",
+            path: "../catalogo milea/index.html",
+            productionUrl: "https://st24030217-maker.github.io/catalogo-milea-/"
+        },
         epad: {
             title: "EPAD — Cursos USICAMM 2026",
             cat: "Web App / Comercial",
