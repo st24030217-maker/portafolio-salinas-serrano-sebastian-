@@ -534,41 +534,85 @@
     <!-- ========== MODAL OVERLAY DE PROYECTOS ========== -->
     <div class="modal-overlay" id="project-modal">
         <div class="modal-card">
+            <!-- Botón Cerrar -->
             <button class="modal-close-btn" aria-label="Cerrar modal">
                 <i data-lucide="x"></i>
             </button>
-            
-            <div class="modal-header-banner">
-                <img src="" class="banner-bg" alt="Banner del Proyecto">
-                <div class="modal-logo-wrapper">
-                    <img src="" class="modal-logo-img" alt="Logo del Proyecto">
-                </div>
+
+            <!-- Pestañas del Modal (Tabs) -->
+            <div class="modal-tabs">
+                <button class="modal-tab-btn active" data-tab="details">
+                    <i data-lucide="info"></i>
+                    Detalles
+                </button>
+                <button class="modal-tab-btn" data-tab="preview">
+                    <i data-lucide="monitor"></i>
+                    Vista Previa
+                </button>
             </div>
             
-            <div class="modal-body">
-                <span class="modal-cat">Categoría</span>
-                <h3 class="modal-title">Título del Proyecto</h3>
-                <p class="modal-description">Descripción detallada...</p>
-                
-                <div class="modal-features">
-                    <h4>Características Principales</h4>
-                    <ul class="modal-features-list">
-                        <!-- Generado por JavaScript -->
-                    </ul>
-                </div>
-                
-                <div class="modal-tech-stack">
-                    <h4>Stack Tecnológico</h4>
-                    <div class="project-techs">
-                        <!-- Generado por JavaScript -->
+            <!-- Contenido de Detalles -->
+            <div class="modal-tab-content active" id="tab-details">
+                <div class="modal-header-banner">
+                    <img src="" class="banner-bg" alt="Banner del Proyecto">
+                    <div class="modal-logo-wrapper">
+                        <img src="" class="modal-logo-img" alt="Logo del Proyecto">
                     </div>
                 </div>
                 
-                <div class="modal-action-bar">
-                    <a href="" class="btn btn-primary btn-view-project" target="_blank">
-                        Visitar Sitio Web
-                        <i data-lucide="external-link"></i>
-                    </a>
+                <div class="modal-body">
+                    <span class="modal-cat">Categoría</span>
+                    <h3 class="modal-title">Título del Proyecto</h3>
+                    <p class="modal-description">Descripción detallada...</p>
+                    
+                    <div class="modal-features">
+                        <h4>Características Principales</h4>
+                        <ul class="modal-features-list">
+                            <!-- Generado por JavaScript -->
+                        </ul>
+                    </div>
+                    
+                    <div class="modal-tech-stack">
+                        <h4>Stack Tecnológico</h4>
+                        <div class="project-techs">
+                            <!-- Generado por JavaScript -->
+                        </div>
+                    </div>
+                    
+                    <div class="modal-action-bar">
+                        <a href="" class="btn btn-primary btn-view-project" target="_blank">
+                            Visitar Sitio Web
+                            <i data-lucide="external-link"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contenido de Vista Previa -->
+            <div class="modal-tab-content" id="tab-preview">
+                <div class="browser-mockup">
+                    <div class="browser-header">
+                        <div class="browser-dots">
+                            <span class="dot red"></span>
+                            <span class="dot yellow"></span>
+                            <span class="dot green"></span>
+                        </div>
+                        <div class="browser-address-bar">
+                            <i data-lucide="lock" class="lock-icon"></i>
+                            <span class="browser-url">https://...</span>
+                        </div>
+                        <button class="browser-refresh-btn" aria-label="Recargar previsualización">
+                            <i data-lucide="rotate-cw"></i>
+                        </button>
+                    </div>
+                    <div class="browser-body">
+                        <!-- Spinner de Carga -->
+                        <div class="preview-loader">
+                            <div class="spinner"></div>
+                            <span>Cargando previsualización en vivo...</span>
+                        </div>
+                        <iframe src="" class="project-iframe" frameborder="0"></iframe>
+                    </div>
                 </div>
             </div>
         </div>

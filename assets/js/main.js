@@ -316,10 +316,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
                     // Configurar Enlace del Proyecto (Resuelve local vs producción)
                     const viewProjectBtn = modalOverlay.querySelector('.btn-view-project');
+                    const finalUrl = resolveProjectPath(data.path, data.productionUrl);
                     if (viewProjectBtn) {
-                        const finalUrl = resolveProjectPath(data.path, data.productionUrl);
                         viewProjectBtn.setAttribute('href', finalUrl);
                     }
+
+                    // Guardar URL para previsualizar en vivo
+                    modalOverlay.setAttribute('data-current-url', finalUrl);
 
                     // Mostrar modal
                     modalOverlay.classList.add('active');
@@ -328,10 +331,77 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
 
+        // Lógica de Pestañas (Tabs)
+        const tabBtns = modalOverlay.querySelectorAll('.modal-tab-btn');
+        const tabContents = modalOverlay.querySelectorAll('.modal-tab-content');
+        const iframe = modalOverlay.querySelector('.project-iframe');
+        const browserUrl = modalOverlay.querySelector('.browser-url');
+        const previewLoader = modalOverlay.querySelector('.preview-loader');
+        const refreshBtn = modalOverlay.querySelector('.browser-refresh-btn');
+
+        tabBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const targetTab = btn.getAttribute('data-tab');
+                
+                // Activar pestaña
+                tabBtns.forEach(b => b.classList.remove('active'));
+                tabContents.forEach(c => c.classList.remove('active'));
+                
+                btn.classList.add('active');
+                const activeContent = modalOverlay.querySelector(`#tab-${targetTab}`);
+                if (activeContent) activeContent.classList.add('active');
+
+                // Si es la pestaña de vista previa, ajustar tamaño de modal y cargar iframe
+                const modalCard = modalOverlay.querySelector('.modal-card');
+                if (targetTab === 'preview') {
+                    if (modalCard) modalCard.classList.add('preview-mode');
+                    const currentUrl = modalOverlay.getAttribute('data-current-url');
+                    
+                    if (iframe && iframe.getAttribute('src') !== currentUrl) {
+                        if (previewLoader) previewLoader.classList.add('active');
+                        if (browserUrl) browserUrl.textContent = currentUrl;
+                        iframe.setAttribute('src', currentUrl);
+                    }
+                } else {
+                    if (modalCard) modalCard.classList.remove('preview-mode');
+                }
+            });
+        });
+
+        // Evento onload del iframe para ocultar el loader
+        if (iframe) {
+            iframe.addEventListener('load', () => {
+                if (previewLoader) previewLoader.classList.remove('active');
+            });
+        }
+
+        // Botón de recargar en el navegador mock
+        if (refreshBtn && iframe) {
+            refreshBtn.addEventListener('click', () => {
+                const currentUrl = modalOverlay.getAttribute('data-current-url');
+                if (previewLoader) previewLoader.classList.add('active');
+                iframe.setAttribute('src', currentUrl);
+            });
+        }
+
         // Cerrar Modal
         const closeModal = () => {
             modalOverlay.classList.remove('active');
             document.body.classList.remove('modal-open');
+            
+            // Limpiar iframe y resetear pestañas
+            if (iframe) iframe.setAttribute('src', '');
+            
+            tabBtns.forEach(b => b.classList.remove('active'));
+            tabContents.forEach(c => c.classList.remove('active'));
+            
+            const detailsBtn = modalOverlay.querySelector('.modal-tab-btn[data-tab="details"]');
+            const detailsContent = modalOverlay.querySelector('#tab-details');
+            if (detailsBtn) detailsBtn.classList.add('active');
+            if (detailsContent) detailsContent.classList.add('active');
+            
+            const modalCard = modalOverlay.querySelector('.modal-card');
+            if (modalCard) modalCard.classList.remove('preview-mode');
         };
 
         modalCloseBtn.addEventListener('click', closeModal);
