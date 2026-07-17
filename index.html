@@ -43,6 +43,7 @@
             <nav class="nav-menu" id="nav-menu">
                 <a href="#hero-body" class="nav-link active">Inicio</a>
                 <a href="#about" class="nav-link">Sobre Mí</a>
+                <a href="#timeline" class="nav-link">Trayectoria</a>
                 <a href="#projects" class="nav-link">Proyectos</a>
                 <a href="#skills" class="nav-link">Habilidades</a>
                 <a href="#contact" class="nav-link">Contacto</a>
@@ -69,6 +70,8 @@
             <div class="hero-glow-1"></div>
             <div class="hero-glow-2"></div>
             <div class="hero-grid"></div>
+            <!-- Canvas de Partículas Interactivas -->
+            <canvas id="hero-canvas" class="hero-canvas"></canvas>
         </div>
         
         <div class="hero-container">
@@ -78,6 +81,9 @@
                     <span class="text-gradient">Disponible para Proyectos</span>
                 </div>
                 <h1>Sebastián Gael<br><span class="text-gradient" id="typing-text">Salinas Serrano</span><span class="typing-cursor">|</span></h1>
+                <div class="hero-subtitle-brand">
+                    Administrador de: <span class="text-gradient font-bold">SSS.SOLUTIONS</span>
+                </div>
                 <p>Hola, mi nombre es <strong>Sebastián Gael Salinas Serrano</strong> y soy estudiante de <strong>Ingeniería en Desarrollo de Software</strong> en la <em>Universidad Tecnológica de la Laguna Durango</em>. Especializado en crear aplicaciones web interactivas, interfaces elegantes de alto rendimiento y soluciones completas (Full Stack).</p>
                 
                 <div class="hero-actions">
@@ -95,6 +101,7 @@
                         <div class="profile-card-info">
                             <h3>Sebastián Gael</h3>
                             <p>Ingeniería en Software (UTLD)</p>
+                            <p class="profile-card-role">Administrador de: <span class="text-gradient font-bold">SSS.SOLUTIONS</span></p>
                         </div>
                     </div>
                 </div>
@@ -132,6 +139,85 @@
                     <h4>4+</h4>
                     <p>Tecnologías</p>
                     <span>Clave en Dominio</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== MI TRAYECTORIA SECTION ========== -->
+    <section class="timeline-section" id="timeline">
+        <div class="section-header">
+            <div class="badge">Mi Camino</div>
+            <h2>Mi Trayectoria</h2>
+            <p>Un recorrido por mi formación profesional, proyectos clave y desarrollo de habilidades.</p>
+        </div>
+
+        <div class="timeline-container">
+            <div class="timeline-line"></div>
+            
+            <!-- Hito 1 -->
+            <div class="timeline-item glass-panel">
+                <div class="timeline-dot"></div>
+                <div class="timeline-date">2023</div>
+                <div class="timeline-content">
+                    <h3>Inicio del Camino & TSU</h3>
+                    <p class="timeline-inst">Universidad Tecnológica de la Laguna Durango</p>
+                    <p>Comencé mis estudios en Desarrollo de Software, adquiriendo bases sólidas de programación en HTML, CSS, JavaScript y estructuración lógica de sistemas.</p>
+                    <div class="timeline-tags">
+                        <span class="timeline-tag-badge">Lógica</span>
+                        <span class="timeline-tag-badge">Fundamentos</span>
+                        <span class="timeline-tag-badge">Algoritmos</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hito 2 -->
+            <div class="timeline-item glass-panel">
+                <div class="timeline-dot"></div>
+                <div class="timeline-date">2024</div>
+                <div class="timeline-content">
+                    <h3>Primeros Proyectos Reales & PWAs</h3>
+                    <p class="timeline-inst">Desarrollador Independiente</p>
+                    <p>Creación de aplicaciones web progresivas (PWAs) y sistemas de pedidos para comercios locales. Integración de Stripe API para pagos en Barbería Vázquez y SQLite para la persistencia local de KB HUATES.</p>
+                    <div class="timeline-tags">
+                        <span class="timeline-tag-badge">PWAs</span>
+                        <span class="timeline-tag-badge">SQLite</span>
+                        <span class="timeline-tag-badge">Stripe API</span>
+                        <span class="timeline-tag-badge">Express</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hito 3 -->
+            <div class="timeline-item glass-panel">
+                <div class="timeline-dot"></div>
+                <div class="timeline-date">2025</div>
+                <div class="timeline-content">
+                    <h3>Arquitectura Avanzada & SEO</h3>
+                    <p class="timeline-inst">Proyectos Especializados</p>
+                    <p>Desarrollo de portales de gran volumen como EPAD, con foco en posicionamiento SEO, rendimiento web sobresaliente y catálogos interactivos con Next.js y Tailwind CSS.</p>
+                    <div class="timeline-tags">
+                        <span class="timeline-tag-badge">Next.js</span>
+                        <span class="timeline-tag-badge">Supabase</span>
+                        <span class="timeline-tag-badge">SEO</span>
+                        <span class="timeline-tag-badge">Tailwind</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hito 4 -->
+            <div class="timeline-item glass-panel">
+                <div class="timeline-dot"></div>
+                <div class="timeline-date">2026 - Presente</div>
+                <div class="timeline-content">
+                    <h3>Ingeniería en Desarrollo de Software</h3>
+                    <p class="timeline-inst">UTLD / Administración en SSS.SOLUTIONS</p>
+                    <p>Cursando Ingeniería de Software para especializarme en desarrollo Full-Stack, patrones de arquitectura de software limpios y liderando iniciativas técnicas en SSS.SOLUTIONS.</p>
+                    <div class="timeline-tags">
+                        <span class="timeline-tag-badge">Ingeniería</span>
+                        <span class="timeline-tag-badge">Full-Stack</span>
+                        <span class="timeline-tag-badge">Arquitectura Limpia</span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -590,6 +676,14 @@
 
             <!-- Contenido de Vista Previa -->
             <div class="modal-tab-content" id="tab-preview">
+                <div class="preview-mode-selector">
+                    <button class="preview-toggle-btn active" data-mode="mockup">
+                        <i data-lucide="image"></i> Mockup Visual
+                    </button>
+                    <button class="preview-toggle-btn" data-mode="iframe">
+                        <i data-lucide="globe"></i> Demo Interactiva
+                    </button>
+                </div>
                 <div class="browser-mockup">
                     <div class="browser-header">
                         <div class="browser-dots">
@@ -606,12 +700,20 @@
                         </button>
                     </div>
                     <div class="browser-body">
-                        <!-- Spinner de Carga -->
-                        <div class="preview-loader">
-                            <div class="spinner"></div>
-                            <span>Cargando previsualización en vivo...</span>
+                        <!-- Mockup Visual -->
+                        <div class="preview-mockup-wrapper active">
+                            <img src="" class="project-mockup-img" alt="Mockup Visual de la Aplicación">
                         </div>
-                        <iframe src="" class="project-iframe" frameborder="0"></iframe>
+                        
+                        <!-- Web Interactiva (Iframe) -->
+                        <div class="preview-iframe-wrapper">
+                            <!-- Spinner de Carga -->
+                            <div class="preview-loader">
+                                <div class="spinner"></div>
+                                <span>Cargando previsualización en vivo...</span>
+                            </div>
+                            <iframe src="" class="project-iframe" frameborder="0"></iframe>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -623,6 +725,23 @@
         <div class="toast success" id="contact-toast">
             <i data-lucide="check-circle" style="color: #10b981;"></i>
             <div class="toast-message">¡Mensaje enviado con éxito! Te contactaré pronto.</div>
+        </div>
+    </div>
+
+    <!-- ========== SELECTOR DE COLOR ACENTO (CUSTOMIZER) ========== -->
+    <div class="accent-customizer" id="accent-customizer">
+        <button class="customizer-toggle" id="customizer-toggle" aria-label="Configurar color">
+            <i data-lucide="palette"></i>
+        </button>
+        <div class="customizer-panel glass-panel">
+            <h4>Color de Acento</h4>
+            <div class="accent-options">
+                <button class="accent-opt active" data-accent="cyan" style="--accent-color: #00f2fe;" title="Cian"></button>
+                <button class="accent-opt" data-accent="pink" style="--accent-color: #ff007f;" title="Rosa"></button>
+                <button class="accent-opt" data-accent="green" style="--accent-color: #10b981;" title="Esmeralda"></button>
+                <button class="accent-opt" data-accent="amber" style="--accent-color: #f59e0b;" title="Ámbar"></button>
+                <button class="accent-opt" data-accent="violet" style="--accent-color: #a855f7;" title="Violeta"></button>
+            </div>
         </div>
     </div>
 

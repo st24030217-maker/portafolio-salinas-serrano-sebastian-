@@ -150,6 +150,7 @@ document.addEventListener('DOMContentLoaded', () => {
             ],
             logo: "assets/img/logo_milea.png",
             banner: "assets/img/milea_cards.jpg",
+            mockup: "assets/img/milea_cards.jpg",
             path: "../catalogo milea/index.html",
             productionUrl: "https://st24030217-maker.github.io/catalogo-milea-/"
         },
@@ -166,6 +167,7 @@ document.addEventListener('DOMContentLoaded', () => {
             ],
             logo: "assets/img/epad.jpeg",
             banner: "assets/img/epad.jpeg",
+            mockup: "assets/img/mockup_epad.png",
             path: "../pagina oficial/index.html",
             productionUrl: "https://epad-ofical.vercel.app/"
         },
@@ -182,6 +184,7 @@ document.addEventListener('DOMContentLoaded', () => {
             ],
             logo: "assets/img/barberia.png",
             banner: "assets/img/barberia_principal.jpg",
+            mockup: "assets/img/mockup_barberia.png",
             path: "../barberia/index.html",
             productionUrl: "https://barberia-vazquez.vercel.app/"
         },
@@ -198,6 +201,7 @@ document.addEventListener('DOMContentLoaded', () => {
             ],
             logo: "assets/img/tikeduca.jpg",
             banner: "assets/img/tikeduca_logo_pagina.jpg",
+            mockup: "assets/img/mockup_tikeduca.png",
             path: "../tikeduca/index.html",
             productionUrl: "https://tik-educa-oficial.vercel.app/"
         },
@@ -214,6 +218,7 @@ document.addEventListener('DOMContentLoaded', () => {
             ],
             logo: "assets/img/kbhuates.png",
             banner: "assets/img/kbhuates.png",
+            mockup: "assets/img/mockup_kbhuates.png",
             path: "../kBHUATES/index.html",
             productionUrl: "https://la-dupla-ttak.vercel.app/"
         },
@@ -230,6 +235,7 @@ document.addEventListener('DOMContentLoaded', () => {
             ],
             logo: "assets/img/los_compadres.jpeg",
             banner: "assets/img/compadres_1.jpeg",
+            mockup: "assets/img/mockup_compadres.png",
             path: "../menu/index.html",
             productionUrl: "https://st24030217-maker.github.io/MENU-COMPADRES/"
         },
@@ -246,6 +252,7 @@ document.addEventListener('DOMContentLoaded', () => {
             ],
             logo: "assets/img/copa.png",
             banner: "assets/img/copa_poster.png",
+            mockup: "assets/img/mockup_copa.png",
             path: "../apli/index.html",
             productionUrl: "https://st24030217-maker.github.io/3ERA-COPA-ZONA-LAGUNA/"
         },
@@ -262,6 +269,7 @@ document.addEventListener('DOMContentLoaded', () => {
             ],
             logo: "assets/img/mockup_maps.png",
             banner: "assets/img/mockup_maps.png",
+            mockup: "assets/img/mockup_maps.png",
             path: "../proyecto maps/maps.html",
             productionUrl: "https://proyecto-maps.vercel.app/"
         }
@@ -271,6 +279,54 @@ document.addEventListener('DOMContentLoaded', () => {
     const modalCloseBtn = document.querySelector('.modal-close-btn');
 
     if (modalOverlay && modalCloseBtn) {
+        const tabBtns = modalOverlay.querySelectorAll('.modal-tab-btn');
+        const tabContents = modalOverlay.querySelectorAll('.modal-tab-content');
+        const iframe = modalOverlay.querySelector('.project-iframe');
+        const browserUrl = modalOverlay.querySelector('.browser-url');
+        const previewLoader = modalOverlay.querySelector('.preview-loader');
+        const refreshBtn = modalOverlay.querySelector('.browser-refresh-btn');
+
+        // Selectores de los contenedores de vista previa
+        const modeBtns = modalOverlay.querySelectorAll('.preview-toggle-btn');
+        const mockupWrapper = modalOverlay.querySelector('.preview-mockup-wrapper');
+        const iframeWrapper = modalOverlay.querySelector('.preview-iframe-wrapper');
+
+        // Función para cambiar de modo de vista previa (Mockup vs Iframe)
+        function setPreviewMode(mode) {
+            modeBtns.forEach(b => {
+                if (b.getAttribute('data-mode') === mode) {
+                    b.classList.add('active');
+                } else {
+                    b.classList.remove('active');
+                }
+            });
+
+            if (mode === 'mockup') {
+                if (mockupWrapper) mockupWrapper.classList.add('active');
+                if (iframeWrapper) iframeWrapper.classList.remove('active');
+                // Detener iframe para ahorrar recursos
+                if (iframe) iframe.setAttribute('src', '');
+            } else {
+                if (mockupWrapper) mockupWrapper.classList.remove('active');
+                if (iframeWrapper) iframeWrapper.classList.add('active');
+                
+                // Cargar iframe si no está cargado
+                const currentUrl = modalOverlay.getAttribute('data-current-url');
+                if (iframe && iframe.getAttribute('src') !== currentUrl) {
+                    if (previewLoader) previewLoader.classList.add('active');
+                    if (browserUrl) browserUrl.textContent = currentUrl;
+                    iframe.setAttribute('src', currentUrl);
+                }
+            }
+        }
+
+        modeBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const mode = btn.getAttribute('data-mode');
+                setPreviewMode(mode);
+            });
+        });
+
         // Abrir Modal
         document.querySelectorAll('.open-modal-btn').forEach(btn => {
             btn.addEventListener('click', (e) => {
@@ -314,6 +370,12 @@ document.addEventListener('DOMContentLoaded', () => {
                         });
                     }
 
+                    // Cargar imagen del mockup
+                    const mockupImg = modalOverlay.querySelector('.project-mockup-img');
+                    if (mockupImg) {
+                        mockupImg.src = data.mockup || data.banner;
+                    }
+
                     // Configurar Enlace del Proyecto (Resuelve local vs producción)
                     const viewProjectBtn = modalOverlay.querySelector('.btn-view-project');
                     const finalUrl = resolveProjectPath(data.path, data.productionUrl);
@@ -324,6 +386,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     // Guardar URL para previsualizar en vivo
                     modalOverlay.setAttribute('data-current-url', finalUrl);
 
+                    // Resetear el modo de vista previa a mockup predeterminado
+                    setPreviewMode('mockup');
+
                     // Mostrar modal
                     modalOverlay.classList.add('active');
                     document.body.classList.add('modal-open');
@@ -332,13 +397,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         // Lógica de Pestañas (Tabs)
-        const tabBtns = modalOverlay.querySelectorAll('.modal-tab-btn');
-        const tabContents = modalOverlay.querySelectorAll('.modal-tab-content');
-        const iframe = modalOverlay.querySelector('.project-iframe');
-        const browserUrl = modalOverlay.querySelector('.browser-url');
-        const previewLoader = modalOverlay.querySelector('.preview-loader');
-        const refreshBtn = modalOverlay.querySelector('.browser-refresh-btn');
-
         tabBtns.forEach(btn => {
             btn.addEventListener('click', () => {
                 const targetTab = btn.getAttribute('data-tab');
@@ -351,19 +409,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 const activeContent = modalOverlay.querySelector(`#tab-${targetTab}`);
                 if (activeContent) activeContent.classList.add('active');
 
-                // Si es la pestaña de vista previa, ajustar tamaño de modal y cargar iframe
+                // Si es la pestaña de vista previa, ajustar tamaño de modal
                 const modalCard = modalOverlay.querySelector('.modal-card');
                 if (targetTab === 'preview') {
                     if (modalCard) modalCard.classList.add('preview-mode');
-                    const currentUrl = modalOverlay.getAttribute('data-current-url');
-                    
-                    if (iframe && iframe.getAttribute('src') !== currentUrl) {
-                        if (previewLoader) previewLoader.classList.add('active');
-                        if (browserUrl) browserUrl.textContent = currentUrl;
-                        iframe.setAttribute('src', currentUrl);
-                    }
+                    // Iniciar en modo mockup
+                    setPreviewMode('mockup');
                 } else {
                     if (modalCard) modalCard.classList.remove('preview-mode');
+                    if (iframe) iframe.setAttribute('src', ''); // Desactivar iframe al salir
                 }
             });
         });
@@ -402,6 +456,9 @@ document.addEventListener('DOMContentLoaded', () => {
             
             const modalCard = modalOverlay.querySelector('.modal-card');
             if (modalCard) modalCard.classList.remove('preview-mode');
+
+            if (mockupWrapper) mockupWrapper.classList.remove('active');
+            if (iframeWrapper) iframeWrapper.classList.remove('active');
         };
 
         modalCloseBtn.addEventListener('click', closeModal);
@@ -497,6 +554,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (typingTextEl) {
         const phrases = [
             "Salinas Serrano",
+            "Administrador de SSS.SOLUTIONS",
             "Desarrollador de Software",
             "Estudiante de Ingeniería",
             "Creador de Soluciones Web",
@@ -539,7 +597,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // --- ANIMACIONES DE SCROLL (REVEAL) ---
-    const revealElements = document.querySelectorAll('section, .skills-category-card, .project-card, .about-text, .about-highlights');
+    const revealElements = document.querySelectorAll('section, .skills-category-card, .project-card, .about-text, .about-highlights, .timeline-item');
     
     revealElements.forEach(el => {
         // Ignorar hero para que aparezca de inmediato
@@ -567,4 +625,232 @@ document.addEventListener('DOMContentLoaded', () => {
             revealObserver.observe(el);
         }
     });
+
+    // --- CANVAS DE PARTÍCULAS INTERACTIVAS (Hero) ---
+    const canvas = document.getElementById('hero-canvas');
+    if (canvas) {
+        const ctx = canvas.getContext('2d');
+        let particlesArray = [];
+        const numberOfParticles = 60;
+
+        function setCanvasSize() {
+            canvas.width = canvas.parentElement.offsetWidth;
+            canvas.height = canvas.parentElement.offsetHeight;
+        }
+        setCanvasSize();
+        window.addEventListener('resize', setCanvasSize);
+
+        const mouse = {
+            x: null,
+            y: null,
+            radius: 100
+        };
+
+        const heroSection = document.getElementById('hero');
+        if (heroSection) {
+            heroSection.addEventListener('mousemove', (e) => {
+                const rect = canvas.getBoundingClientRect();
+                mouse.x = e.clientX - rect.left;
+                mouse.y = e.clientY - rect.top;
+            });
+            heroSection.addEventListener('mouseleave', () => {
+                mouse.x = null;
+                mouse.y = null;
+            });
+        }
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 2 + 1;
+                this.speedX = Math.random() * 0.4 - 0.2;
+                this.speedY = Math.random() * 0.4 - 0.2;
+            }
+
+            draw() {
+                const primaryColor = getComputedStyle(document.documentElement).getPropertyValue('--color-primary').trim();
+                ctx.fillStyle = primaryColor || '#00f2fe';
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.closePath();
+                ctx.fill();
+            }
+
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+
+                if (this.x < 0 || this.x > canvas.width) this.speedX = -this.speedX;
+                if (this.y < 0 || this.y > canvas.height) this.speedY = -this.speedY;
+
+                if (mouse.x !== null && mouse.y !== null) {
+                    let dx = mouse.x - this.x;
+                    let dy = mouse.y - this.y;
+                    let distance = Math.sqrt(dx * dx + dy * dy);
+                    if (distance < mouse.radius) {
+                        let force = (mouse.radius - distance) / mouse.radius;
+                        let directionX = dx / distance;
+                        let directionY = dy / distance;
+                        
+                        this.x -= directionX * force * 2;
+                        this.y -= directionY * force * 2;
+                    }
+                }
+            }
+        }
+
+        function initParticles() {
+            particlesArray = [];
+            for (let i = 0; i < numberOfParticles; i++) {
+                particlesArray.push(new Particle());
+            }
+        }
+        initParticles();
+
+        function connectParticles() {
+            let opacityValue = 1;
+            const primaryColorRGB = getComputedStyle(document.documentElement).getPropertyValue('--color-primary-rgb').trim() || '0, 242, 254';
+            
+            for (let a = 0; a < particlesArray.length; a++) {
+                for (let b = a; b < particlesArray.length; b++) {
+                    let dx = particlesArray[a].x - particlesArray[b].x;
+                    let dy = particlesArray[a].y - particlesArray[b].y;
+                    let distance = Math.sqrt(dx * dx + dy * dy);
+
+                    if (distance < 110) {
+                        opacityValue = 1 - (distance / 110);
+                        ctx.strokeStyle = `rgba(${primaryColorRGB}, ${opacityValue * 0.12})`;
+                        ctx.lineWidth = 1;
+                        ctx.beginPath();
+                        ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
+                        ctx.lineTo(particlesArray[b].x, particlesArray[b].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+        }
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            for (let i = 0; i < particlesArray.length; i++) {
+                particlesArray[i].update();
+                particlesArray[i].draw();
+            }
+            connectParticles();
+            requestAnimationFrame(animateParticles);
+        }
+        animateParticles();
+
+        window.addEventListener('resize', () => {
+            initParticles();
+        });
+    }
+
+    // --- PERSONALIZADOR DE COLOR DE ACENTO ---
+    const customizerToggle = document.getElementById('customizer-toggle');
+    const customizerWrapper = document.getElementById('accent-customizer');
+    const accentOpts = document.querySelectorAll('.accent-opt');
+
+    const accentPresets = {
+        cyan: { primaryHex: '#00f2fe', primaryRGB: '0, 242, 254', secondaryHex: '#a855f7', secondaryRGB: '168, 85, 247' },
+        pink: { primaryHex: '#ff007f', primaryRGB: '255, 0, 127', secondaryHex: '#7c3aed', secondaryRGB: '124, 58, 237' },
+        green: { primaryHex: '#10b981', primaryRGB: '16, 185, 129', secondaryHex: '#06b6d4', secondaryRGB: '6, 182, 212' },
+        amber: { primaryHex: '#f59e0b', primaryRGB: '245, 158, 11', secondaryHex: '#e11d48', secondaryRGB: '225, 29, 72' },
+        violet: { primaryHex: '#7c3aed', primaryRGB: '124, 58, 237', secondaryHex: '#f43f5e', secondaryRGB: '244, 63, 94' }
+    };
+
+    function applyAccentColor(accentName) {
+        const preset = accentPresets[accentName];
+        if (!preset) return;
+
+        document.documentElement.style.setProperty('--color-primary', preset.primaryHex);
+        document.documentElement.style.setProperty('--color-primary-rgb', preset.primaryRGB);
+        document.documentElement.style.setProperty('--color-secondary', preset.secondaryHex);
+        document.documentElement.style.setProperty('--color-secondary-rgb', preset.secondaryRGB);
+
+        localStorage.setItem('accent-color', accentName);
+
+        accentOpts.forEach(opt => {
+            if (opt.getAttribute('data-accent') === accentName) {
+                opt.classList.add('active');
+            } else {
+                opt.classList.remove('active');
+            }
+        });
+    }
+
+    const savedAccent = localStorage.getItem('accent-color');
+    if (savedAccent && accentPresets[savedAccent]) {
+        applyAccentColor(savedAccent);
+    }
+
+    if (customizerToggle && customizerWrapper) {
+        customizerToggle.addEventListener('click', (e) => {
+            e.stopPropagation();
+            customizerWrapper.classList.toggle('active');
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!customizerWrapper.contains(e.target)) {
+                customizerWrapper.classList.remove('active');
+            }
+        });
+    }
+
+    accentOpts.forEach(opt => {
+        opt.addEventListener('click', () => {
+            const accentName = opt.getAttribute('data-accent');
+            applyAccentColor(accentName);
+        });
+    });
+
+    // --- ANIMACIÓN DE CONTADORES DE ESTADÍSTICAS ---
+    const statsContainer = document.querySelector('.about-highlights');
+    const statNumbers = document.querySelectorAll('.highlight-box h4');
+
+    if (statsContainer && statNumbers.length > 0) {
+        const animateStats = () => {
+            statNumbers.forEach(stat => {
+                const text = stat.textContent.trim();
+                const numericMatch = text.match(/\d+/);
+                if (!numericMatch) return;
+
+                const targetVal = parseInt(numericMatch[0], 10);
+                const suffix = text.replace(numericMatch[0], '');
+                
+                let currentVal = 0;
+                const duration = 1200; // 1.2s
+                const startTime = performance.now();
+
+                const updateCount = (currentTime) => {
+                    const elapsedTime = currentTime - startTime;
+                    const progress = Math.min(elapsedTime / duration, 1);
+                    const easeProgress = progress * (2 - progress);
+                    currentVal = Math.floor(easeProgress * targetVal);
+                    
+                    stat.textContent = currentVal + suffix;
+
+                    if (progress < 1) {
+                        requestAnimationFrame(updateCount);
+                    } else {
+                        stat.textContent = text;
+                    }
+                };
+
+                requestAnimationFrame(updateCount);
+            });
+        };
+
+        const statsObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateStats();
+                    statsObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.15 });
+
+        statsObserver.observe(statsContainer);
+    }
 });
