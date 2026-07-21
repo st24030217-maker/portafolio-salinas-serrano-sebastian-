@@ -137,6 +137,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- MODALES DE PROYECTOS (DETALLES AMPLIADOS) ---
     const projectData = {
+        fidelidad: {
+            title: "Tarjeta de Fidelidad & Membresía Digital",
+            cat: "Web App / PWA / Comercial",
+            techs: ["HTML5", "CSS3 (Vanilla)", "JavaScript (ES6)", "Web Audio API", "HTML5 Canvas", "Apple Wallet Integration"],
+            desc: "Simulador interactivo y de alta fidelidad para tarjetas de fidelidad digitales multi-marca. Diseñado con una estética corporativa formal al estilo de Apple, permite alternar marcas (Cafetería, Barbería, Sushi, Boutique) con sus respectivos esquemas de color y conteo de sellos. Cuenta con respuesta táctil directa, reproducción sonora en tiempo real por el sintetizador del navegador e integración simulada con Apple Wallet.",
+            features: [
+                "Menú dropdown integrado en cabecera para alternar dinámicamente entre negocios.",
+                "Cuadrícula de sellos interactiva con checks de confirmación y sonidos de retroalimentación en tiempo real (Web Audio API).",
+                "Celebración festiva con confeti de colores dorado y plata dibujado en Canvas 2D a 60 FPS.",
+                "Simulador oficial de Apple Wallet con pase de fidelidad detallado, código de barras y avisos push nativos."
+            ],
+            logo: "assets/img/logo_wallet.png",
+            banner: "assets/img/mockup_fidelidad.png",
+            mockup: "assets/img/mockup_fidelidad.png",
+            path: "../tarjeta de fidelidad/index.html",
+            productionUrl: "https://github.com/st24030217-maker/tarjeta-fidelidad-.git"
+        },
         milea: {
             title: "MILEA studio — Catálogo de Servicios",
             cat: "Web App / E-commerce / Catálogo",
