@@ -152,7 +152,7 @@ document.addEventListener('DOMContentLoaded', () => {
             banner: "assets/img/mockup_fidelidad.png",
             mockup: "assets/img/mockup_fidelidad.png",
             path: "../tarjeta de fidelidad/index.html",
-            productionUrl: "https://github.com/st24030217-maker/tarjeta-fidelidad-.git"
+            productionUrl: "https://st24030217-maker.github.io/tarjeta-fidelidad-/"
         },
         milea: {
             title: "MILEA studio — Catálogo de Servicios",
