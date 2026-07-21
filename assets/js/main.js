@@ -6,6 +6,10 @@
 document.addEventListener('DOMContentLoaded', () => {
     // Función para resolver enlaces de proyectos locales vs producción (Vercel/GitHub Pages)
     function resolveProjectPath(localPath, productionUrl) {
+        // Si estamos en entorno local (file://), usar la ruta relativa local
+        if (window.location.protocol === 'file:') {
+            return localPath;
+        }
         return productionUrl || localPath;
     }
 
@@ -151,7 +155,7 @@ document.addEventListener('DOMContentLoaded', () => {
             logo: "assets/img/logo_wallet.png",
             banner: "assets/img/mockup_fidelidad.png",
             mockup: "assets/img/mockup_fidelidad.png",
-            path: "../tarjeta de fidelidad/index.html",
+            path: "../tarjeta%20de%20fidelidad/index.html",
             productionUrl: "https://st24030217-maker.github.io/tarjeta-fidelidad-/"
         },
         milea: {
