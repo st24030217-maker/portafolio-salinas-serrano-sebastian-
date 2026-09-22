@@ -1474,6 +1474,47 @@ textarea.form-control {
     color: var(--text-muted);
 }
 
+.footer-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.footer-location {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+}
+
+.footer-location strong {
+    color: var(--text-primary);
+}
+
+.footer-location i,
+.footer-location svg {
+    width: 15px;
+    height: 15px;
+    color: var(--color-primary);
+}
+
+.hero-subtitle-brand .location-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    font-weight: 500;
+}
+
+.hero-subtitle-brand .location-tag i,
+.hero-subtitle-brand .location-tag svg {
+    width: 14px;
+    height: 14px;
+    color: var(--color-primary);
+}
+
 /* ==========================================================================
    TOAST DE NOTIFICACIÓN
    ========================================================================== */
@@ -2352,6 +2393,21 @@ body.light-theme .brand-hero-logo {
 .brand-badge-pill svg {
     width: 14px;
     height: 14px;
+}
+
+.brand-badge-pill.location-pill {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.15);
+    color: var(--text-secondary);
+    margin-top: -14px;
+    margin-bottom: 22px;
+    font-size: 0.76rem;
+}
+
+body.light-theme .brand-badge-pill.location-pill {
+    background: rgba(0, 0, 0, 0.04);
+    border-color: rgba(0, 0, 0, 0.12);
+    color: var(--text-secondary);
 }
 
 .brand-metrics-row {
