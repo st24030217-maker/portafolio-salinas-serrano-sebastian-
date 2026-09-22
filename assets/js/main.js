@@ -690,8 +690,8 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             draw() {
-                const primaryColor = getComputedStyle(document.documentElement).getPropertyValue('--color-primary').trim();
-                ctx.fillStyle = primaryColor || '#00f2fe';
+                const isLight = document.body.classList.contains('light-theme');
+                ctx.fillStyle = isLight ? 'rgba(0, 0, 0, 0.3)' : 'rgba(255, 255, 255, 0.45)';
                 ctx.beginPath();
                 ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
                 ctx.closePath();
@@ -730,9 +730,7 @@ document.addEventListener('DOMContentLoaded', () => {
         initParticles();
 
         function connectParticles() {
-            let opacityValue = 1;
-            const primaryColorRGB = getComputedStyle(document.documentElement).getPropertyValue('--color-primary-rgb').trim() || '0, 242, 254';
-            
+            const isLight = document.body.classList.contains('light-theme');
             for (let a = 0; a < particlesArray.length; a++) {
                 for (let b = a; b < particlesArray.length; b++) {
                     let dx = particlesArray[a].x - particlesArray[b].x;
@@ -740,8 +738,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     let distance = Math.sqrt(dx * dx + dy * dy);
 
                     if (distance < 110) {
-                        opacityValue = 1 - (distance / 110);
-                        ctx.strokeStyle = `rgba(${primaryColorRGB}, ${opacityValue * 0.12})`;
+                        let opacityValue = (1 - (distance / 110)) * (isLight ? 0.08 : 0.12);
+                        ctx.strokeStyle = isLight ? `rgba(0, 0, 0, ${opacityValue})` : `rgba(255, 255, 255, ${opacityValue})`;
                         ctx.lineWidth = 1;
                         ctx.beginPath();
                         ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
@@ -768,63 +766,8 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- PERSONALIZADOR DE COLOR DE ACENTO ---
-    const customizerToggle = document.getElementById('customizer-toggle');
-    const customizerWrapper = document.getElementById('accent-customizer');
-    const accentOpts = document.querySelectorAll('.accent-opt');
-
-    const accentPresets = {
-        cyan: { primaryHex: '#00f2fe', primaryRGB: '0, 242, 254', secondaryHex: '#a855f7', secondaryRGB: '168, 85, 247' },
-        pink: { primaryHex: '#ff007f', primaryRGB: '255, 0, 127', secondaryHex: '#7c3aed', secondaryRGB: '124, 58, 237' },
-        green: { primaryHex: '#10b981', primaryRGB: '16, 185, 129', secondaryHex: '#06b6d4', secondaryRGB: '6, 182, 212' },
-        amber: { primaryHex: '#f59e0b', primaryRGB: '245, 158, 11', secondaryHex: '#e11d48', secondaryRGB: '225, 29, 72' },
-        violet: { primaryHex: '#7c3aed', primaryRGB: '124, 58, 237', secondaryHex: '#f43f5e', secondaryRGB: '244, 63, 94' }
-    };
-
-    function applyAccentColor(accentName) {
-        const preset = accentPresets[accentName];
-        if (!preset) return;
-
-        document.documentElement.style.setProperty('--color-primary', preset.primaryHex);
-        document.documentElement.style.setProperty('--color-primary-rgb', preset.primaryRGB);
-        document.documentElement.style.setProperty('--color-secondary', preset.secondaryHex);
-        document.documentElement.style.setProperty('--color-secondary-rgb', preset.secondaryRGB);
-
-        localStorage.setItem('accent-color', accentName);
-
-        accentOpts.forEach(opt => {
-            if (opt.getAttribute('data-accent') === accentName) {
-                opt.classList.add('active');
-            } else {
-                opt.classList.remove('active');
-            }
-        });
-    }
-
-    const savedAccent = localStorage.getItem('accent-color');
-    if (savedAccent && accentPresets[savedAccent]) {
-        applyAccentColor(savedAccent);
-    }
-
-    if (customizerToggle && customizerWrapper) {
-        customizerToggle.addEventListener('click', (e) => {
-            e.stopPropagation();
-            customizerWrapper.classList.toggle('active');
-        });
-
-        document.addEventListener('click', (e) => {
-            if (!customizerWrapper.contains(e.target)) {
-                customizerWrapper.classList.remove('active');
-            }
-        });
-    }
-
-    accentOpts.forEach(opt => {
-        opt.addEventListener('click', () => {
-            const accentName = opt.getAttribute('data-accent');
-            applyAccentColor(accentName);
-        });
-    });
+    // Purga de preferencias antiguas de acento de color
+    localStorage.removeItem('accent-color');
 
     // --- ANIMACIÓN DE CONTADORES DE ESTADÍSTICAS ---
     const statsContainer = document.querySelector('.about-highlights');
