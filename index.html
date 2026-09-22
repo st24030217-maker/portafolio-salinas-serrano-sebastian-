@@ -51,8 +51,6 @@
             </nav>
 
             <div class="nav-controls">
-                <a href="#contacto" class="btn btn-primary nav-cta">Cotizar</a>
-
                 <!-- Toggle Tema Claro/Oscuro -->
                 <button class="theme-toggle" id="theme-toggle" aria-label="Cambiar tema">
                     <i data-lucide="sun" class="sun-icon"></i>
@@ -137,12 +135,12 @@
                     </div>
                 </a>
 
-                <!-- Letter A: Cotizar Proyecto -->
-                <a href="#contacto" class="social-flip-node" aria-label="Cotizar Proyecto">
-                    <span class="social-flip-tooltip">Cotizar</span>
+                <!-- Letter A: Contacto Directo -->
+                <a href="#contacto" class="social-flip-node" aria-label="Contacto Directo">
+                    <span class="social-flip-tooltip">Contacto</span>
                     <div class="social-flip-card-inner">
                         <div class="social-flip-front">A</div>
-                        <div class="social-flip-back"><i data-lucide="file-text"></i></div>
+                        <div class="social-flip-back"><i data-lucide="send"></i></div>
                     </div>
                 </a>
 
@@ -196,7 +194,7 @@
                         <i data-lucide="arrow-right"></i>
                     </a>
                     <a href="#contacto" class="btn btn-secondary">
-                        Cotizar Proyecto
+                        Contáctanos
                         <i data-lucide="message-square"></i>
                     </a>
                 </div>
@@ -945,12 +943,12 @@
         </div>
     </section>
 
-    <!-- ========== CONTACTO & COTIZACIONES ========== -->
+    <!-- ========== CONTACTO ========== -->
     <section class="contact" id="contacto">
         <div class="section-header">
-            <div class="badge">Contacto & Cotizaciones</div>
+            <div class="badge">Contacto</div>
             <h2>Hablemos de tu Proyecto</h2>
-            <p>¿Tienes en mente una plataforma web, una PWA o un sistema de gestión para tu empresa? Contáctanos y recibe una propuesta adaptada a tus metas.</p>
+            <p>¿Tienes en mente una plataforma web, una PWA o un sistema de gestión para tu empresa? Contáctanos y conversemos sobre tus metas.</p>
         </div>
 
         <div class="contact-container">
@@ -996,7 +994,7 @@
                 </div>
             </div>
 
-            <!-- Formulario de Contacto / Cotización -->
+            <!-- Formulario de Contacto -->
             <form class="contact-form glass-panel" id="contact-form">
                 <div class="form-group">
                     <label for="name">Nombre / Empresa</label>
@@ -1007,26 +1005,16 @@
                     <input type="email" id="email" class="form-control" placeholder="tu@empresa.com" required autocomplete="email">
                 </div>
                 <div class="form-group">
-                    <label for="service-type">Tipo de Solución Requerida</label>
-                    <select id="service-type" class="form-select">
-                        <option value="pwa">Aplicación Web / PWA</option>
-                        <option value="sistema">Sistema de Gestión a Medida / Backend</option>
-                        <option value="ecommerce">E-Commerce o Menú Digital con Pedidos</option>
-                        <option value="optimizacion">Optimización, SEO & Rediseño UI/UX</option>
-                        <option value="otro">Otra Solución Personalizada</option>
-                    </select>
-                </div>
-                <div class="form-group">
                     <label for="subject">Asunto</label>
-                    <input type="text" id="subject" class="form-control" placeholder="Ej: Cotización de sistema para comercio" required>
+                    <input type="text" id="subject" class="form-control" placeholder="Ej: Consulta sobre desarrollo de software o web" required>
                 </div>
                 <div class="form-group">
-                    <label for="message">Detalles del Proyecto</label>
+                    <label for="message">Mensaje</label>
                     <textarea id="message" class="form-control" placeholder="Cuéntanos brevemente lo que necesita tu negocio..." required></textarea>
                 </div>
                 
                 <button type="submit" class="btn btn-primary" style="align-self: flex-start;">
-                    Solicitar Cotización
+                    Enviar Mensaje
                     <i data-lucide="send"></i>
                 </button>
             </form>
@@ -1154,7 +1142,7 @@
     <div class="toast-container">
         <div class="toast success" id="contact-toast">
             <i data-lucide="check-circle" style="color: var(--color-primary);"></i>
-            <div class="toast-message">¡Solicitud enviada con éxito! El equipo de sss.solutions te contactará a la brevedad.</div>
+            <div class="toast-message">¡Mensaje enviado con éxito! El equipo de sss.solutions te responderá a la brevedad.</div>
         </div>
     </div>
 
