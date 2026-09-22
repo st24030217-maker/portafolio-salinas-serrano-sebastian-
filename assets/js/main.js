@@ -820,6 +820,34 @@ document.addEventListener('DOMContentLoaded', () => {
 
     initMorphText();
 
+    // --- VENGEANCE UI: SOCIAL FLIP BUTTON CONTROLLER ---
+    function initSocialFlipButton() {
+        const container = document.getElementById('social-flip-container');
+        if (!container) return;
+
+        container.addEventListener('mouseenter', () => {
+            container.classList.add('flipped');
+        });
+
+        container.addEventListener('mouseleave', () => {
+            container.classList.remove('flipped');
+        });
+
+        // Soporte táctil en dispositivos móviles
+        let touchTimeout;
+        container.addEventListener('touchstart', () => {
+            clearTimeout(touchTimeout);
+            container.classList.toggle('flipped');
+        }, { passive: true });
+    }
+
+    initSocialFlipButton();
+
+    // Actualizar iconos Lucide
+    if (typeof lucide !== 'undefined') {
+        lucide.createIcons();
+    }
+
     // Purga de preferencias antiguas de acento de color
     localStorage.removeItem('accent-color');
 
