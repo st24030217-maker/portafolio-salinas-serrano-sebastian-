@@ -4,7 +4,7 @@
    ========================================================================== */
 
 /* @import de Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;700;800&display=swap');
 
 :root {
     /* Modo Oscuro Monocromático Negro & Blanco (Oficial sss.solutions) */
@@ -2437,6 +2437,155 @@ body.light-theme .service-tech-tags span {
     font-size: 0.88rem;
     color: var(--text-muted);
     margin-top: 6px;
+}
+
+/* ==========================================================================
+   VENGEANCE UI - MORPH TEXT COMPONENT (Monocromo Black & White)
+   ========================================================================== */
+.morph-text-root {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 8px;
+    width: 100%;
+}
+
+.morph-lead-title {
+    font-family: var(--font-heading);
+    font-size: clamp(2.4rem, 4.8vw, 3.8rem);
+    font-weight: 800;
+    line-height: 1.1;
+    color: var(--text-primary);
+    letter-spacing: -0.03em;
+    margin-bottom: 6px;
+}
+
+.morph-text-container {
+    position: relative;
+    user-select: none;
+    font-family: 'Space Grotesk', var(--font-heading), sans-serif;
+    font-size: clamp(2.1rem, 4.4vw, 3.6rem);
+    font-weight: 800;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    filter: url(#morph-threshold);
+    display: block;
+    width: 100%;
+    min-height: 1.3em;
+}
+
+.morph-word-rotator {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    height: 1.3em;
+    width: 100%;
+}
+
+.morph-word {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    transform-origin: left center;
+    opacity: 0;
+    white-space: nowrap;
+    animation-name: morph-word-rotate;
+    animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    animation-iteration-count: infinite;
+    animation-fill-mode: both;
+    color: #ffffff;
+    text-shadow: 0 0 25px rgba(255, 255, 255, 0.45);
+    will-change: transform, opacity, filter;
+    letter-spacing: -0.01em;
+}
+
+body.light-theme .morph-word {
+    color: #000000;
+    text-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+}
+
+.morph-subtext {
+    font-family: 'Space Grotesk', var(--font-body), sans-serif;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    margin-top: 14px;
+    margin-bottom: 4px;
+    opacity: 0.85;
+}
+
+/* Keyframes de morphing líquido y transición de palabras */
+@keyframes morph-word-rotate {
+    0% {
+        opacity: 0;
+        filter: blur(18px);
+        transform: translateY(-50%) scale(0.88);
+    }
+    3% {
+        opacity: 0.6;
+        filter: blur(8px);
+    }
+    6%, 20% {
+        opacity: 1;
+        filter: blur(0px);
+        transform: translateY(-50%) scale(1);
+    }
+    23% {
+        opacity: 0.6;
+        filter: blur(8px);
+    }
+    26%, 100% {
+        opacity: 0;
+        filter: blur(18px);
+        transform: translateY(-50%) scale(1.12);
+    }
+}
+
+@media (max-width: 768px) {
+    .morph-text-root {
+        align-items: center;
+        text-align: center;
+    }
+    .morph-lead-title {
+        text-align: center;
+    }
+    .morph-word-rotator {
+        justify-content: center;
+    }
+    .morph-word {
+        left: 50%;
+        transform: translate(-50%, -50%);
+        transform-origin: center center;
+    }
+    @keyframes morph-word-rotate {
+        0% {
+            opacity: 0;
+            filter: blur(18px);
+            transform: translate(-50%, -50%) scale(0.88);
+        }
+        3% {
+            opacity: 0.6;
+            filter: blur(8px);
+        }
+        6%, 20% {
+            opacity: 1;
+            filter: blur(0px);
+            transform: translate(-50%, -50%) scale(1);
+        }
+        23% {
+            opacity: 0.6;
+            filter: blur(8px);
+        }
+        26%, 100% {
+            opacity: 0;
+            filter: blur(18px);
+            transform: translate(-50%, -50%) scale(1.12);
+        }
+    }
 }
 
 

@@ -67,6 +67,21 @@
         </div>
     </header>
 
+    <!-- SVG Threshold Filter para Morph Text (Gooey Transition Vengeance UI) -->
+    <svg aria-hidden="true" focusable="false" class="morph-svg-filter" style="position: absolute; width: 0; height: 0; pointer-events: none;">
+        <defs>
+            <filter id="morph-threshold">
+                <feColorMatrix
+                    in="SourceGraphic"
+                    type="matrix"
+                    values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 25 -9"
+                    result="goo"
+                />
+                <feComposite in="SourceGraphic" in2="goo" operator="atop" />
+            </filter>
+        </defs>
+    </svg>
+
     <!-- ========== HERO SECTION ========== -->
     <section class="hero" id="hero">
         <div class="hero-bg">
@@ -83,7 +98,19 @@
                     <div class="dot"></div>
                     <span class="text-gradient">Innovación & Soluciones Digitales</span>
                 </div>
-                <h1>Desarrollamos<br><span class="text-gradient" id="typing-text">Soluciones de Software</span><span class="typing-cursor">|</span></h1>
+                <!-- Morph Text (Vengeance UI Component) -->
+                <div class="morph-text-root">
+                    <h1 class="morph-lead-title">Desarrollamos</h1>
+                    <div class="morph-text-container" id="morph-text-container">
+                        <div class="morph-word-rotator" id="morph-word-rotator">
+                            <span class="morph-word">SOFTWARE A MEDIDA</span>
+                            <span class="morph-word">APLICACIONES PWA</span>
+                            <span class="morph-word">SOLUCIONES WEB</span>
+                            <span class="morph-word">SISTEMAS DIGITALES</span>
+                        </div>
+                    </div>
+                    <p class="morph-subtext">&bull; INGENIERÍA &bull; ALTO RENDIMIENTO &bull; ESCALABILIDAD</p>
+                </div>
                 <div class="hero-subtitle-brand">
                     Empresa de Tecnología: <span class="text-gradient font-bold">sss.solutions</span>
                 </div>

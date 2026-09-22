@@ -800,6 +800,26 @@ document.addEventListener('DOMContentLoaded', () => {
         renderWavyBackground();
     }
 
+    // --- VENGEANCE UI: MORPH TEXT ANIMATION CONTROLLER ---
+    function initMorphText() {
+        const rotator = document.getElementById('morph-word-rotator');
+        if (!rotator) return;
+        
+        const words = rotator.querySelectorAll('.morph-word');
+        if (!words || words.length === 0) return;
+
+        const interval = 3000; // 3000ms por palabra (parámetro estándar de VengeanceUI)
+        const totalDuration = (interval / 1000) * words.length; // p. ej. 12s con 4 palabras
+        const wordDuration = interval / 1000; // 3s
+
+        words.forEach((word, index) => {
+            word.style.animationDuration = `${totalDuration}s`;
+            word.style.animationDelay = `${index * wordDuration}s`;
+        });
+    }
+
+    initMorphText();
+
     // Purga de preferencias antiguas de acento de color
     localStorage.removeItem('accent-color');
 
