@@ -2815,44 +2815,39 @@ body.light-theme .morph-word {
 }
 
 /* ==========================================================================
-   VENGEANCE UI - SOCIAL FLIP BUTTON COMPONENT (Parte Superior)
+   VENGEANCE UI - SOCIAL FLIP BUTTON COMPONENT (En Barra de Navegación / Controles)
    ========================================================================== */
-.social-flip-wrapper {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    margin-bottom: 25px;
-    z-index: 20;
-    position: relative;
-}
-
 .social-flip-container {
     position: relative;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 8px;
-    padding: 10px 18px;
+    gap: 4px;
+    padding: 3px 6px;
     border-radius: 20px;
-    background: rgba(12, 12, 14, 0.75);
+    background: rgba(14, 14, 16, 0.85);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
     user-select: none;
     transition: border-color var(--transition-normal), box-shadow var(--transition-normal);
 }
 
 body.light-theme .social-flip-container {
-    background: rgba(255, 255, 255, 0.85);
-    border-color: rgba(0, 0, 0, 0.1);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+    background: rgba(255, 255, 255, 0.9);
+    border-color: rgba(0, 0, 0, 0.12);
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
 }
 
 .social-flip-container:hover {
-    border-color: rgba(255, 255, 255, 0.25);
-    box-shadow: 0 14px 40px rgba(0, 0, 0, 0.7), 0 0 25px rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.35);
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.6), 0 0 15px rgba(255, 255, 255, 0.12);
+}
+
+body.light-theme .social-flip-container:hover {
+    border-color: rgba(0, 0, 0, 0.3);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
 }
 
 /* Border Lasers */
@@ -2870,7 +2865,7 @@ body.light-theme .social-flip-container {
     left: 0;
     height: 1px;
     width: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.7), transparent);
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.8), transparent);
     animation: laser-line-top 2.5s linear infinite;
 }
 
@@ -2884,7 +2879,7 @@ body.light-theme .social-flip-laser-top {
     left: 0;
     height: 1px;
     width: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.7), transparent);
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.8), transparent);
     animation: laser-line-bottom 2.5s linear infinite;
 }
 
@@ -2905,8 +2900,8 @@ body.light-theme .social-flip-laser-bottom {
 /* Nodes & 3D Flip */
 .social-flip-node {
     position: relative;
-    width: 38px;
-    height: 38px;
+    width: 29px;
+    height: 29px;
     cursor: pointer;
     perspective: 1000px;
     text-decoration: none;
@@ -2918,7 +2913,7 @@ body.light-theme .social-flip-laser-bottom {
     width: 100%;
     height: 100%;
     transform-style: preserve-3d;
-    transition: transform 0.75s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transition: transform 0.65s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 /* Staggered Delay on Hover */
@@ -2928,12 +2923,12 @@ body.light-theme .social-flip-laser-bottom {
 }
 
 .social-flip-node:nth-of-type(1) .social-flip-card-inner { transition-delay: 0s; }
-.social-flip-node:nth-of-type(2) .social-flip-card-inner { transition-delay: 0.08s; }
-.social-flip-node:nth-of-type(3) .social-flip-card-inner { transition-delay: 0.16s; }
-.social-flip-node:nth-of-type(4) .social-flip-card-inner { transition-delay: 0.24s; }
-.social-flip-node:nth-of-type(5) .social-flip-card-inner { transition-delay: 0.32s; }
-.social-flip-node:nth-of-type(6) .social-flip-card-inner { transition-delay: 0.40s; }
-.social-flip-node:nth-of-type(7) .social-flip-card-inner { transition-delay: 0.48s; }
+.social-flip-node:nth-of-type(2) .social-flip-card-inner { transition-delay: 0.06s; }
+.social-flip-node:nth-of-type(3) .social-flip-card-inner { transition-delay: 0.12s; }
+.social-flip-node:nth-of-type(4) .social-flip-card-inner { transition-delay: 0.18s; }
+.social-flip-node:nth-of-type(5) .social-flip-card-inner { transition-delay: 0.24s; }
+.social-flip-node:nth-of-type(6) .social-flip-card-inner { transition-delay: 0.30s; }
+.social-flip-node:nth-of-type(7) .social-flip-card-inner { transition-delay: 0.36s; }
 
 /* Front Face */
 .social-flip-front {
@@ -2942,14 +2937,14 @@ body.light-theme .social-flip-laser-bottom {
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 10px;
+    border-radius: 7px;
     background: #141416;
     color: #ffffff;
     font-family: 'Space Grotesk', var(--font-heading), sans-serif;
-    font-size: 1rem;
+    font-size: 0.82rem;
     font-weight: 800;
     border: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
     backface-visibility: hidden;
     -webkit-backface-visibility: hidden;
     transition: background 0.3s, color 0.3s;
@@ -2968,11 +2963,11 @@ body.light-theme .social-flip-front {
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 10px;
+    border-radius: 7px;
     background: #ffffff;
     color: #000000;
     border: 1px solid #ffffff;
-    box-shadow: 0 4px 14px rgba(255, 255, 255, 0.3);
+    box-shadow: 0 2px 10px rgba(255, 255, 255, 0.3);
     backface-visibility: hidden;
     -webkit-backface-visibility: hidden;
     transform: rotateY(180deg);
@@ -2980,8 +2975,8 @@ body.light-theme .social-flip-front {
 }
 
 .social-flip-node:hover .social-flip-back {
-    transform: rotateY(180deg) scale(1.12);
-    box-shadow: 0 0 20px rgba(255, 255, 255, 0.7);
+    transform: rotateY(180deg) scale(1.1);
+    box-shadow: 0 0 16px rgba(255, 255, 255, 0.7);
 }
 
 body.light-theme .social-flip-back {
@@ -2991,36 +2986,36 @@ body.light-theme .social-flip-back {
 }
 
 body.light-theme .social-flip-node:hover .social-flip-back {
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.35);
 }
 
 .social-flip-back svg,
 .social-flip-back i {
-    width: 17px;
-    height: 17px;
+    width: 14px;
+    height: 14px;
     stroke-width: 2.2;
 }
 
-/* Tooltip */
+/* Tooltip (Despliega hacia abajo en el navbar) */
 .social-flip-tooltip {
     position: absolute;
-    bottom: calc(100% + 12px);
+    top: calc(100% + 9px);
     left: 50%;
-    transform: translateX(-50%) translateY(8px) scale(0.85);
+    transform: translateX(-50%) translateY(-6px) scale(0.85);
     opacity: 0;
     pointer-events: none;
     background: #000000;
     color: #ffffff;
-    padding: 5px 10px;
-    border-radius: 8px;
-    font-size: 0.72rem;
+    padding: 4px 8px;
+    border-radius: 7px;
+    font-size: 0.7rem;
     font-weight: 700;
     white-space: nowrap;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.7);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.8);
     border: 1px solid rgba(255, 255, 255, 0.2);
     transition: opacity 0.2s cubic-bezier(0.16, 1, 0.3, 1), 
                 transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-    z-index: 100;
+    z-index: 1050;
     font-family: 'Space Grotesk', var(--font-body), sans-serif;
     letter-spacing: 0.05em;
     text-transform: uppercase;
@@ -3030,26 +3025,26 @@ body.light-theme .social-flip-tooltip {
     background: #ffffff;
     color: #000000;
     border-color: rgba(0, 0, 0, 0.15);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.15);
 }
 
 .social-flip-tooltip::after {
     content: "";
     position: absolute;
-    top: 100%;
+    bottom: 100%;
     left: 50%;
-    transform: translateX(-50%) translateY(-3px) rotate(45deg);
+    transform: translateX(-50%) translateY(3px) rotate(45deg);
     width: 6px;
     height: 6px;
     background: #000000;
-    border-right: 1px solid rgba(255, 255, 255, 0.2);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    border-left: 1px solid rgba(255, 255, 255, 0.2);
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 body.light-theme .social-flip-tooltip::after {
     background: #ffffff;
-    border-right-color: rgba(0, 0, 0, 0.15);
-    border-bottom-color: rgba(0, 0, 0, 0.15);
+    border-left-color: rgba(0, 0, 0, 0.15);
+    border-top-color: rgba(0, 0, 0, 0.15);
 }
 
 .social-flip-container:hover .social-flip-node:hover .social-flip-tooltip {
@@ -3057,23 +3052,54 @@ body.light-theme .social-flip-tooltip::after {
     transform: translateX(-50%) translateY(0) scale(1);
 }
 
-/* Responsiveness on small screens */
-@media (max-width: 576px) {
-    .social-flip-container {
-        gap: 5px;
-        padding: 8px 12px;
+/* Adaptación responsive para pantallas medianas y móviles */
+@media (max-width: 1100px) and (min-width: 769px) {
+    .nav-menu {
+        gap: 18px;
+    }
+    .nav-link {
+        font-size: 0.88rem;
     }
     .social-flip-node {
-        width: 32px;
-        height: 32px;
+        width: 26px;
+        height: 26px;
     }
     .social-flip-front {
-        font-size: 0.85rem;
+        font-size: 0.75rem;
     }
     .social-flip-back svg,
     .social-flip-back i {
-        width: 14px;
-        height: 14px;
+        width: 12px;
+        height: 12px;
+    }
+}
+
+@media (max-width: 576px) {
+    .social-flip-container {
+        gap: 3px;
+        padding: 2px 4px;
+    }
+    .social-flip-node {
+        width: 24px;
+        height: 24px;
+    }
+    .social-flip-front {
+        font-size: 0.7rem;
+    }
+    .social-flip-back svg,
+    .social-flip-back i {
+        width: 11px;
+        height: 11px;
+    }
+    .theme-toggle {
+        width: 36px;
+        height: 36px;
+    }
+}
+
+@media (max-width: 390px) {
+    .social-flip-container {
+        display: none; /* En pantallas sumamente estrechas, deja prioridad total al logotipo y menú */
     }
 }
 
