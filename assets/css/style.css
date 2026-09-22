@@ -492,18 +492,24 @@ body:not(.light-theme) .theme-toggle .moon-icon {
 }
 
 .hero-container {
-    max-width: 1200px;
+    max-width: 980px;
     width: 100%;
     margin: 0 auto;
     padding: 0 24px;
-    display: grid;
-    grid-template-columns: 1.2fr 0.8fr;
+    display: flex;
+    flex-direction: column;
     align-items: center;
-    gap: 50px;
+    justify-content: center;
+    text-align: center;
     z-index: 1;
 }
 
 .hero-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 100%;
     opacity: 0;
     transform: translateY(30px);
     animation: fade-slide-up 0.8s 0.2s forwards;
@@ -512,6 +518,7 @@ body:not(.light-theme) .theme-toggle .moon-icon {
 .hero-tag {
     display: inline-flex;
     align-items: center;
+    justify-content: center;
     gap: 8px;
     margin-bottom: 20px;
     font-family: var(--font-heading);
@@ -538,13 +545,16 @@ body:not(.light-theme) .theme-toggle .moon-icon {
     font-size: 1.2rem;
     color: var(--text-secondary);
     margin-bottom: 35px;
-    max-width: 600px;
+    max-width: 740px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .hero-actions {
     display: flex;
     gap: 16px;
     flex-wrap: wrap;
+    justify-content: center;
 }
 
 /* Tarjeta / Imagen de Presentación */
@@ -2671,7 +2681,8 @@ body.light-theme .service-tech-tags span {
 .morph-text-root {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
+    text-align: center;
     margin-bottom: 8px;
     width: 100%;
 }
@@ -2684,6 +2695,7 @@ body.light-theme .service-tech-tags span {
     color: var(--text-primary);
     letter-spacing: -0.03em;
     margin-bottom: 6px;
+    text-align: center;
 }
 
 .morph-text-container {
@@ -2704,7 +2716,7 @@ body.light-theme .service-tech-tags span {
     position: relative;
     display: flex;
     align-items: center;
-    justify-content: flex-start;
+    justify-content: center;
     height: 1.3em;
     width: 100%;
 }
@@ -2712,9 +2724,9 @@ body.light-theme .service-tech-tags span {
 .morph-word {
     position: absolute;
     top: 50%;
-    left: 0;
-    transform: translateY(-50%);
-    transform-origin: left center;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transform-origin: center center;
     opacity: 0;
     white-space: nowrap;
     animation-name: morph-word-rotate;
@@ -2742,14 +2754,15 @@ body.light-theme .morph-word {
     margin-top: 14px;
     margin-bottom: 4px;
     opacity: 0.85;
+    text-align: center;
 }
 
-/* Keyframes de morphing líquido y transición de palabras */
+/* Keyframes de morphing líquido y transición de palabras centradas */
 @keyframes morph-word-rotate {
     0% {
         opacity: 0;
         filter: blur(18px);
-        transform: translateY(-50%) scale(0.88);
+        transform: translate(-50%, -50%) scale(0.88);
     }
     3% {
         opacity: 0.6;
@@ -2758,7 +2771,7 @@ body.light-theme .morph-word {
     6%, 20% {
         opacity: 1;
         filter: blur(0px);
-        transform: translateY(-50%) scale(1);
+        transform: translate(-50%, -50%) scale(1);
     }
     23% {
         opacity: 0.6;
@@ -2767,50 +2780,7 @@ body.light-theme .morph-word {
     26%, 100% {
         opacity: 0;
         filter: blur(18px);
-        transform: translateY(-50%) scale(1.12);
-    }
-}
-
-@media (max-width: 768px) {
-    .morph-text-root {
-        align-items: center;
-        text-align: center;
-    }
-    .morph-lead-title {
-        text-align: center;
-    }
-    .morph-word-rotator {
-        justify-content: center;
-    }
-    .morph-word {
-        left: 50%;
-        transform: translate(-50%, -50%);
-        transform-origin: center center;
-    }
-    @keyframes morph-word-rotate {
-        0% {
-            opacity: 0;
-            filter: blur(18px);
-            transform: translate(-50%, -50%) scale(0.88);
-        }
-        3% {
-            opacity: 0.6;
-            filter: blur(8px);
-        }
-        6%, 20% {
-            opacity: 1;
-            filter: blur(0px);
-            transform: translate(-50%, -50%) scale(1);
-        }
-        23% {
-            opacity: 0.6;
-            filter: blur(8px);
-        }
-        26%, 100% {
-            opacity: 0;
-            filter: blur(18px);
-            transform: translate(-50%, -50%) scale(1.12);
-        }
+        transform: translate(-50%, -50%) scale(1.12);
     }
 }
 
