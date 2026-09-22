@@ -647,123 +647,157 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // --- CANVAS DE PARTÍCULAS INTERACTIVAS (Hero) ---
-    const canvas = document.getElementById('hero-canvas');
-    if (canvas) {
-        const ctx = canvas.getContext('2d');
-        let particlesArray = [];
-        const numberOfParticles = 60;
-
-        function setCanvasSize() {
-            canvas.width = canvas.parentElement.offsetWidth;
-            canvas.height = canvas.parentElement.offsetHeight;
-        }
-        setCanvasSize();
-        window.addEventListener('resize', setCanvasSize);
-
-        const mouse = {
-            x: null,
-            y: null,
-            radius: 100
-        };
-
-        const heroSection = document.getElementById('hero');
-        if (heroSection) {
-            heroSection.addEventListener('mousemove', (e) => {
-                const rect = canvas.getBoundingClientRect();
-                mouse.x = e.clientX - rect.left;
-                mouse.y = e.clientY - rect.top;
-            });
-            heroSection.addEventListener('mouseleave', () => {
-                mouse.x = null;
-                mouse.y = null;
-            });
-        }
-
-        class Particle {
-            constructor() {
-                this.x = Math.random() * canvas.width;
-                this.y = Math.random() * canvas.height;
-                this.size = Math.random() * 2 + 1;
-                this.speedX = Math.random() * 0.4 - 0.2;
-                this.speedY = Math.random() * 0.4 - 0.2;
-            }
-
-            draw() {
-                const isLight = document.body.classList.contains('light-theme');
-                ctx.fillStyle = isLight ? 'rgba(0, 0, 0, 0.3)' : 'rgba(255, 255, 255, 0.45)';
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                ctx.closePath();
-                ctx.fill();
-            }
-
-            update() {
-                this.x += this.speedX;
-                this.y += this.speedY;
-
-                if (this.x < 0 || this.x > canvas.width) this.speedX = -this.speedX;
-                if (this.y < 0 || this.y > canvas.height) this.speedY = -this.speedY;
-
-                if (mouse.x !== null && mouse.y !== null) {
-                    let dx = mouse.x - this.x;
-                    let dy = mouse.y - this.y;
-                    let distance = Math.sqrt(dx * dx + dy * dy);
-                    if (distance < mouse.radius) {
-                        let force = (mouse.radius - distance) / mouse.radius;
-                        let directionX = dx / distance;
-                        let directionY = dy / distance;
-                        
-                        this.x -= directionX * force * 2;
-                        this.y -= directionY * force * 2;
-                    }
-                }
+    // --- ACETERNITY UI - WAVY BACKGROUND (RECIBIDOR / HERO) ---
+    // Implementación de Simplex Noise 3D procedural para ondas fluidas continuas
+    class SimplexNoise3D {
+        constructor() {
+            this.p = new Uint8Array(256);
+            for (let i = 0; i < 256; i++) this.p[i] = Math.floor(Math.random() * 256);
+            this.perm = new Uint8Array(512);
+            this.permMod12 = new Uint8Array(512);
+            for (let i = 0; i < 512; i++) {
+                this.perm[i] = this.p[i & 255];
+                this.permMod12[i] = (this.perm[i] % 12);
             }
         }
-
-        function initParticles() {
-            particlesArray = [];
-            for (let i = 0; i < numberOfParticles; i++) {
-                particlesArray.push(new Particle());
+        noise(xin, yin, zin) {
+            const grad3 = [
+                [1,1,0],[-1,1,0],[1,-1,0],[-1,-1,0],
+                [1,0,1],[-1,0,1],[1,0,-1],[-1,0,-1],
+                [0,1,1],[0,-1,1],[0,1,-1],[0,-1,-1]
+            ];
+            const F3 = 1.0 / 3.0;
+            const G3 = 1.0 / 6.0;
+            let n0, n1, n2, n3;
+            const s = (xin + yin + zin) * F3;
+            const i = Math.floor(xin + s);
+            const j = Math.floor(yin + s);
+            const k = Math.floor(zin + s);
+            const t = (i + j + k) * G3;
+            const X0 = i - t;
+            const Y0 = j - t;
+            const Z0 = k - t;
+            const x0 = xin - X0;
+            const y0 = yin - Y0;
+            const z0 = zin - Z0;
+            let i1, j1, k1;
+            let i2, j2, k2;
+            if (x0 >= y0) {
+                if (y0 >= z0) { i1=1; j1=0; k1=0; i2=1; j2=1; k2=0; }
+                else if (x0 >= z0) { i1=1; j1=0; k1=0; i2=1; j2=0; k2=1; }
+                else { i1=0; j1=0; k1=1; i2=1; j2=0; k2=1; }
+            } else {
+                if (y0 < z0) { i1=0; j1=0; k1=1; i2=0; j2=1; k2=1; }
+                else if (x0 < z0) { i1=0; j1=1; k1=0; i2=0; j2=1; k2=1; }
+                else { i1=0; j1=1; k1=0; i2=1; j2=1; k2=0; }
             }
+            const x1 = x0 - i1 + G3;
+            const y1 = y0 - j1 + G3;
+            const z1 = z0 - k1 + G3;
+            const x2 = x0 - i2 + 2.0 * G3;
+            const y2 = y0 - j2 + 2.0 * G3;
+            const z2 = z0 - k2 + 2.0 * G3;
+            const x3 = x0 - 1.0 + 3.0 * G3;
+            const y3 = y0 - 1.0 + 3.0 * G3;
+            const z3 = z0 - 1.0 + 3.0 * G3;
+            const ii = i & 255;
+            const jj = j & 255;
+            const kk = k & 255;
+            let t0 = 0.6 - x0*x0 - y0*y0 - z0*z0;
+            if (t0 < 0) n0 = 0.0;
+            else {
+                t0 *= t0;
+                const gi0 = this.permMod12[ii + this.perm[jj + this.perm[kk]]];
+                n0 = t0 * t0 * (grad3[gi0][0]*x0 + grad3[gi0][1]*y0 + grad3[gi0][2]*z0);
+            }
+            let t1 = 0.6 - x1*x1 - y1*y1 - z1*z1;
+            if (t1 < 0) n1 = 0.0;
+            else {
+                t1 *= t1;
+                const gi1 = this.permMod12[ii + i1 + this.perm[jj + j1 + this.perm[kk + k1]]];
+                n1 = t1 * t1 * (grad3[gi1][0]*x1 + grad3[gi1][1]*y1 + grad3[gi1][2]*z1);
+            }
+            let t2 = 0.6 - x2*x2 - y2*y2 - z2*z2;
+            if (t2 < 0) n2 = 0.0;
+            else {
+                t2 *= t2;
+                const gi2 = this.permMod12[ii + i2 + this.perm[jj + j2 + this.perm[kk + k2]]];
+                n2 = t2 * t2 * (grad3[gi2][0]*x2 + grad3[gi2][1]*y2 + grad3[gi2][2]*z2);
+            }
+            let t3 = 0.6 - x3*x3 - y3*y3 - z3*z3;
+            if (t3 < 0) n3 = 0.0;
+            else {
+                t3 *= t3;
+                const gi3 = this.permMod12[ii + 1 + this.perm[jj + 1 + this.perm[kk + 1]]];
+                n3 = t3 * t3 * (grad3[gi3][0]*x3 + grad3[gi3][1]*y3 + grad3[gi3][2]*z3);
+            }
+            return 32.0 * (n0 + n1 + n2 + n3);
         }
-        initParticles();
+    }
 
-        function connectParticles() {
+    const heroCanvas = document.getElementById('hero-canvas');
+    if (heroCanvas) {
+        const ctx = heroCanvas.getContext('2d');
+        const noise = new SimplexNoise3D();
+        let w = 0, h = 0, nt = 0;
+        const waveCount = 5;
+        const waveWidth = 45;
+        const speed = 0.0022;
+
+        // Paleta monocromática en blanco y negro (Aceternity B&W Edition)
+        const darkWaveColors = [
+            "rgba(255, 255, 255, 0.42)",
+            "rgba(228, 228, 231, 0.32)",
+            "rgba(161, 161, 170, 0.25)",
+            "rgba(113, 113, 122, 0.20)",
+            "rgba(63, 63, 70, 0.16)"
+        ];
+
+        const lightWaveColors = [
+            "rgba(9, 9, 11, 0.32)",
+            "rgba(39, 39, 42, 0.24)",
+            "rgba(82, 82, 91, 0.18)",
+            "rgba(113, 113, 122, 0.14)",
+            "rgba(161, 161, 170, 0.10)"
+        ];
+
+        function resizeCanvas() {
+            w = heroCanvas.width = heroCanvas.parentElement.offsetWidth;
+            h = heroCanvas.height = heroCanvas.parentElement.offsetHeight;
+        }
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+
+        function drawWaves() {
+            nt += speed;
             const isLight = document.body.classList.contains('light-theme');
-            for (let a = 0; a < particlesArray.length; a++) {
-                for (let b = a; b < particlesArray.length; b++) {
-                    let dx = particlesArray[a].x - particlesArray[b].x;
-                    let dy = particlesArray[a].y - particlesArray[b].y;
-                    let distance = Math.sqrt(dx * dx + dy * dy);
+            const colors = isLight ? lightWaveColors : darkWaveColors;
 
-                    if (distance < 110) {
-                        let opacityValue = (1 - (distance / 110)) * (isLight ? 0.08 : 0.12);
-                        ctx.strokeStyle = isLight ? `rgba(0, 0, 0, ${opacityValue})` : `rgba(255, 255, 255, ${opacityValue})`;
-                        ctx.lineWidth = 1;
-                        ctx.beginPath();
-                        ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
-                        ctx.lineTo(particlesArray[b].x, particlesArray[b].y);
-                        ctx.stroke();
-                    }
+            for (let i = 0; i < waveCount; i++) {
+                ctx.beginPath();
+                ctx.lineWidth = waveWidth;
+                ctx.strokeStyle = colors[i % colors.length];
+
+                for (let x = 0; x < w; x += 5) {
+                    const y = noise.noise(x / 800, 0.3 * i, nt) * 100;
+                    ctx.lineTo(x, y + h * 0.5);
                 }
+                ctx.stroke();
+                ctx.closePath();
             }
         }
 
-        function animateParticles() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            for (let i = 0; i < particlesArray.length; i++) {
-                particlesArray[i].update();
-                particlesArray[i].draw();
-            }
-            connectParticles();
-            requestAnimationFrame(animateParticles);
-        }
-        animateParticles();
+        function renderWavyBackground() {
+            const isLight = document.body.classList.contains('light-theme');
+            ctx.fillStyle = isLight ? "#ffffff" : "#000000";
+            ctx.globalAlpha = 0.5;
+            ctx.fillRect(0, 0, w, h);
+            ctx.globalAlpha = 1;
 
-        window.addEventListener('resize', () => {
-            initParticles();
-        });
+            drawWaves();
+            requestAnimationFrame(renderWavyBackground);
+        }
+        renderWavyBackground();
     }
 
     // Purga de preferencias antiguas de acento de color
