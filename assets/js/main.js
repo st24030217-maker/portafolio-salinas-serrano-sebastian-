@@ -574,12 +574,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const typingTextEl = document.getElementById('typing-text');
     if (typingTextEl) {
         const phrases = [
-            "Salinas Serrano",
-            "Administrador de SSS.SOLUTIONS",
-            "Desarrollador de Software",
-            "Estudiante de Ingeniería",
-            "Creador de Soluciones Web",
-            "Desarrollador Full Stack"
+            "Soluciones de Software",
+            "Aplicaciones Web & PWAs",
+            "Sistemas a Medida",
+            "Comercio Digital & Stripe",
+            "Arquitecturas Escalables",
+            "sss.solutions"
         ];
         let phraseIndex = 0;
         let charIndex = 0;
@@ -618,7 +618,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // --- ANIMACIONES DE SCROLL (REVEAL) ---
-    const revealElements = document.querySelectorAll('section, .skills-category-card, .project-card, .about-text, .about-highlights, .timeline-item');
+    const revealElements = document.querySelectorAll('section, .skills-category-card, .project-card, .service-card, .process-step-card, .about-text, .about-highlights');
     
     revealElements.forEach(el => {
         // Ignorar hero para que aparezca de inmediato
