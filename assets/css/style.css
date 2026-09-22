@@ -761,144 +761,310 @@ body:not(.light-theme) .theme-toggle .moon-icon {
     margin: 0 auto;
     padding: 0 24px;
     display: grid;
-    grid-template-cols: repeat(auto-fill, minmax(340px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
     gap: 30px;
 }
 
 .project-card {
+    --card-inner-bg: #0e0e10;
     border-radius: 20px;
+    background: var(--card-inner-bg);
+    padding: 6px;
     overflow: hidden;
-    background-color: var(--bg-surface);
-    border: 1px solid var(--border-color);
-    box-shadow: var(--shadow-sm);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+                box-shadow 0.4s ease,
+                border-color 0.4s ease;
     display: flex;
     flex-direction: column;
     height: 100%;
-    transition: transform var(--transition-normal), border-color var(--transition-normal), box-shadow var(--transition-normal);
+    position: relative;
+}
+
+body.light-theme .project-card {
+    --card-inner-bg: #f4f4f5;
+    border-color: rgba(0, 0, 0, 0.1);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
 }
 
 .project-card:hover {
-    transform: translateY(-8px);
-    border-color: rgba(var(--color-primary-rgb), 0.3);
-    box-shadow: var(--shadow-md), 0 10px 30px -10px rgba(var(--color-primary-rgb), 0.1);
+    transform: scale(1.038) translateY(-4px);
+    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.85), 0 0 30px rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.3);
 }
 
-.project-img-wrapper {
-    position: relative;
-    height: 200px;
-    overflow: hidden;
-    background: linear-gradient(135deg, #111111, #1e1e1e);
+body.light-theme .project-card:hover {
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15), 0 0 20px rgba(0, 0, 0, 0.08);
+    border-color: rgba(0, 0, 0, 0.3);
+}
+
+/* TOP SECTION */
+.project-card .top-section {
+    height: 185px;
+    border-radius: 15px;
     display: flex;
-    align-items: center;
-    justify-content: center;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+    background: #18181b;
 }
 
-/* Si hay imagen de fondo */
-.project-card img {
+.project-card .top-section .banner-img {
+    position: absolute;
+    inset: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform var(--transition-slow);
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.project-card:hover .project-img-wrapper img {
+.project-card:hover .top-section .banner-img {
     transform: scale(1.08);
 }
 
-/* Fallback o Placeholder con Gradiente y Logo */
-.project-placeholder {
+.project-card .top-section .banner-overlay {
     position: absolute;
     inset: 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    color: #fff;
-    padding: 30px;
-    text-align: center;
-    background: linear-gradient(135deg, rgba(var(--color-primary-rgb), 0.1) 0%, rgba(var(--color-secondary-rgb), 0.1) 100%);
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.6) 100%);
+    pointer-events: none;
+    z-index: 1;
 }
 
-.project-placeholder-logo {
-    width: 80px;
-    height: 80px;
-    border-radius: 20px;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 12px;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+/* THE SKEWED NOTCH / BORDER TAB */
+.project-card .top-section .border {
+    border-bottom-right-radius: 10px;
+    height: 32px;
+    width: 135px;
+    background: var(--card-inner-bg);
+    position: relative;
+    transform: skew(-40deg);
+    box-shadow: -10px -10px 0 0 var(--card-inner-bg);
+    z-index: 2;
+    transition: background-color var(--transition-normal), box-shadow var(--transition-normal);
 }
 
-.project-placeholder-logo img {
+.project-card .top-section .border::before {
+    content: "";
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    top: 0;
+    right: -15px;
+    background: transparent;
+    border-top-left-radius: 10px;
+    box-shadow: -5px -5px 0 2px var(--card-inner-bg);
+    transition: box-shadow var(--transition-normal);
+}
+
+.project-card .top-section::before {
+    content: "";
+    position: absolute;
+    top: 32px;
+    left: 0;
+    background: transparent;
+    height: 15px;
+    width: 15px;
+    border-top-left-radius: 15px;
+    box-shadow: -5px -5px 0 2px var(--card-inner-bg);
+    z-index: 2;
+    transition: box-shadow var(--transition-normal);
+}
+
+/* NOTCH ICONS ROW */
+.project-card .top-section .icons {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
-    height: 100%;
-    object-fit: contain;
-    border-radius: 19px;
+    height: 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 3;
+    padding: 0 10px 0 12px;
 }
 
-.project-placeholder span {
-    font-family: var(--font-heading);
-    font-size: 0.75rem;
-    font-weight: 600;
+.project-card .top-section .icons .logo {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.project-card .top-section .icons .logo .notch-pill {
+    font-family: 'Space Grotesk', var(--font-heading), sans-serif;
+    font-size: 0.66rem;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    color: var(--text-primary);
     text-transform: uppercase;
-    letter-spacing: 1px;
-    color: var(--color-primary);
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    padding: 2px 8px;
+    border-radius: 6px;
 }
 
-.project-info {
-    padding: 30px;
+body.light-theme .project-card .top-section .icons .logo .notch-pill {
+    background: rgba(0, 0, 0, 0.08);
+    border-color: rgba(0, 0, 0, 0.15);
+    color: #000;
+}
+
+.project-card .top-section .icons .social-media {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+}
+
+.project-card .top-section .icons .social-media .notch-btn {
+    width: 26px;
+    height: 26px;
+    border-radius: 8px;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    text-decoration: none;
+    padding: 0;
+}
+
+.project-card .top-section .icons .social-media .notch-btn svg,
+.project-card .top-section .icons .social-media .notch-btn i {
+    width: 14px;
+    height: 14px;
+    stroke-width: 2.2;
+}
+
+.project-card .top-section .icons .social-media .notch-btn:hover {
+    background: #ffffff;
+    color: #000000;
+    border-color: #ffffff;
+    transform: scale(1.12);
+}
+
+body.light-theme .project-card .top-section .icons .social-media .notch-btn {
+    background: rgba(255, 255, 255, 0.85);
+    color: #000000;
+    border-color: rgba(0, 0, 0, 0.18);
+}
+
+body.light-theme .project-card .top-section .icons .social-media .notch-btn:hover {
+    background: #000000;
+    color: #ffffff;
+    border-color: #000000;
+}
+
+/* BOTTOM SECTION */
+.project-card .bottom-section {
+    padding: 16px 12px 10px 12px;
     display: flex;
     flex-direction: column;
     flex-grow: 1;
 }
 
-.project-cat {
-    font-size: 0.75rem;
+.project-card .bottom-section .title {
+    display: block;
+    font-family: 'Space Grotesk', var(--font-heading), sans-serif;
+    font-size: 1.05rem;
+    font-weight: 800;
+    color: var(--text-primary);
+    letter-spacing: 1.5px;
+    text-align: center;
     text-transform: uppercase;
-    letter-spacing: 1px;
-    color: var(--color-primary);
-    font-weight: 700;
-    margin-bottom: 8px;
+    margin-bottom: 6px;
 }
 
-.project-info h3 {
-    font-size: 1.4rem;
-    margin-bottom: 12px;
-}
-
-.project-info p {
-    font-size: 0.92rem;
+.project-card .bottom-section .project-desc {
+    font-size: 0.85rem;
     color: var(--text-secondary);
-    margin-bottom: 24px;
+    line-height: 1.5;
+    text-align: center;
+    margin-bottom: 14px;
     display: -webkit-box;
-    -webkit-line-clamp: 3;
+    -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
+    min-height: 2.5em;
 }
 
-.project-techs {
+/* METRICS / STATS ROW */
+.project-card .bottom-section .row {
     display: flex;
-    gap: 8px;
-    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
     margin-top: auto;
+    margin-bottom: 14px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    padding: 8px 4px;
 }
 
-.project-tech-badge {
-    font-size: 0.75rem;
-    font-weight: 500;
+body.light-theme .project-card .bottom-section .row {
+    background: rgba(0, 0, 0, 0.03);
+    border-color: rgba(0, 0, 0, 0.08);
+}
+
+.project-card .bottom-section .row .item {
+    flex: 1;
+    text-align: center;
+    padding: 2px 4px;
+}
+
+.project-card .bottom-section .row .item:nth-child(2) {
+    border-left: 1px solid rgba(255, 255, 255, 0.12);
+    border-right: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+body.light-theme .project-card .bottom-section .row .item:nth-child(2) {
+    border-left-color: rgba(0, 0, 0, 0.1);
+    border-right-color: rgba(0, 0, 0, 0.1);
+}
+
+.project-card .bottom-section .row .item .big-text {
+    font-family: 'Space Grotesk', var(--font-heading), sans-serif;
+    font-size: 0.82rem;
+    font-weight: 800;
+    display: block;
     color: var(--text-primary);
-    background-color: var(--bg-surface-hover);
-    padding: 4px 10px;
-    border-radius: 12px;
-    border: 1px solid var(--border-color);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.project-card .bottom-section .row .item .regular-text {
+    font-size: 0.62rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    display: block;
+    margin-top: 2px;
+}
+
+/* BUTTON VER SOLUCIÓN */
+.project-card .bottom-section .card-cta-btn {
+    width: 100%;
+    margin-top: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 14px;
+    border-radius: 10px;
+    font-size: 0.88rem;
+    font-weight: 700;
 }
 
 /* Elemento ocultado para transiciones de filtro */
 .project-card.hidden {
-    display: none;
+    display: none !important;
 }
 
 /* ==========================================================================
